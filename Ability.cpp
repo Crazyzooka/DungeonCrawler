@@ -12,14 +12,14 @@ Ability::Ability()
 {
     Name	= " ";
     Damage	= 0;
-    Effect	= Effect;
+    //toApply	= Effect;
 }
 
 Ability::Ability(string i_Name, int i_Damage, Effect i_Effect) 
 {
     Name = i_Name;
     Damage = i_Damage;
-    Effect = i_Effect;
+    //Effect = i_Effect;
 }
 
 Ability::~Ability() {

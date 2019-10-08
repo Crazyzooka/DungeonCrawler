@@ -1,7 +1,8 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-#include"Effect.h"
+#include "Effect.h"
+#include "Entity.h"
 
 #include <iostream>
 #include <string>
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-class Ability 
+class Ability
 {
 public:
 
@@ -20,12 +21,13 @@ public:
 
     string Name;
     int Damage;
-    Effect Effect;
+    Effect toApply;
 
-    vector<Entity> SkillsRequired[];
+    vector<Entity> SkillsRequire[];
 
-    int ApplyCost()=0;
+    virtual int ApplyCost() = 0;
 
     ~Ability();
-}
+};
+
 #endif
