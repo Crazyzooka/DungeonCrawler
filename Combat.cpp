@@ -13,7 +13,7 @@ void Combat::startCombat(Player user, NPC Room.NPC)
 
 }
 
-void Combat::useAbility(whosTurn, Ability action)
+void Combat::useAbility(int whosTurn, Ability action)
 {
 
 }
@@ -23,7 +23,7 @@ void Combat::applyEffect(Entity person)
 
 }
 
-void Combat::endCombat (Player user, NPC Room.NPC)
+void Combat::endCombat(Player user, NPC Room.NPC)
 {
 
 }

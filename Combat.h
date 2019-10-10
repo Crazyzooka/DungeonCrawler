@@ -14,9 +14,9 @@ public:
 	Combat();
 
 	void startCombat(Player user, NPC Room.NPC);
-	void useAbility(whosTurn, Ability action);
+	void useAbility(int whosTurn, Ability action);
 	void applyEffect(Entity person);
-	void endCombat (Player user, NPC Room.NPC);
+	void endCombat(Player user, NPC Room.NPC);
 
 	~Combat();
 };
