@@ -1,25 +1,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Item.h"
 #include "Entity.h"
 
 using namespace std;
+
+int Entity::currentID = 1;
 
 Entity::Entity()					//Creating an empty entity
 {
 	name = "?";
 	species = "?";
 	level = 0;
-	ID = currentID++;
-	mana = 100;
-}
-
-Entity::Entity(string entitySpecies)
-{
-	name = "?"
-	species = entitySpecies;
-	level = 0;
-	ID = currentID++;
+	ID = currentID;
+	currentID++;
 	mana = 100;
 }
 
@@ -86,4 +81,6 @@ NPC::NPC()
 }
 
 NPC::~NPC()
-{}
+{
+	
+}

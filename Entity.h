@@ -10,7 +10,7 @@ using namespace std;
 class Entity
 {
 public:
-		//static int currentID = 0;
+		Entity();
 
 		string name;
 		string species;
@@ -23,12 +23,11 @@ public:
 		int mana;						//Used for using skills and abilities
 		int level;
 		int ID;							//Number of entity created
+		static int currentID;
 		bool isDead;
 		bool isInCombat;
 		bool isPlayer;
 		
-
-		Entity();		//Defines the entity's species as it is created
 		~Entity();
 
 };
