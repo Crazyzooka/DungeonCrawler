@@ -47,7 +47,7 @@ public:
 	int size;
 
 	//FUNCTIONS
-	void ApplyToAll(Entity Entity);
+	void ApplyToAll(int Limb);
 	void ApplyToLimb(int Limb);
 
 	~Consumable();

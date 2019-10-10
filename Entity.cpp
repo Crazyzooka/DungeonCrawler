@@ -56,7 +56,7 @@ void Player::makeMove()
 
 }
 
-void Player::attack(Ability action, NPC person)
+void Player::attack(int action, NPC person)
 {
 
 }

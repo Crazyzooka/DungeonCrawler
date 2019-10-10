@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "Item.h"
+
 #include <string>
 #include <vector>
 
@@ -56,7 +57,7 @@ public:
 		void viewCharacter();						//View stats of character
 		void levelUp();
 		void makeMove();
-		void attack(Ability action, NPC person);
+		void attack(int action, NPC person);
 
 		~Player();
 };

@@ -1,6 +1,6 @@
-#include "pch.h"
 #include "Floorgen.h"
 #include "Functions.h"
+#include <cmath>
 #include <iostream>
 
 //prints out the entire floor using characters as ASCII picture
@@ -195,7 +195,7 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 		xexit = random(FLOORSIZE);
 		yexit = random(FLOORSIZE);
 
-		if (matrix[xexit][yexit] != 1 && abs(yexit - yentry) > FLOORSIZE / 4 && abs(xexit - xentry) > FLOORSIZE / 4)
+		if (matrix[xexit][yexit] != 1 && std::abs(yexit - yentry) > FLOORSIZE / 4 && std::abs(xexit - xentry) > FLOORSIZE / 4)
 		{
 			break;
 		}
