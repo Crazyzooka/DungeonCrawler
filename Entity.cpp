@@ -27,16 +27,6 @@ Player::Player()
 {
 }
 
-void Player::setName(string entityName)
-{
-	name = entityName;
-}
-
-string Player::getName()
-{
-	return name;
-}
-
 void Player::takeItem(Item item)
 {
 
@@ -82,5 +72,5 @@ NPC::NPC()
 
 NPC::~NPC()
 {
-	
+
 }
