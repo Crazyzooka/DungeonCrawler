@@ -1,21 +1,22 @@
+#include "pch.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Item.h"
+
 #include "Entity.h"
+#include "Item.h"
 
 using namespace std;
-
-int Entity::currentID = 1;
+int Entity::currentID = 0;
 
 Entity::Entity()					//Creating an empty entity
 {
-	name = "?";
-	species = "?";
-	level = 0;
-	ID = currentID;
-	currentID++;
+	Name = "?";
+	level = 1;
+	ID = currentID++;
 	mana = 100;
+	gold = 300;
 }
 
 Entity::~Entity()
@@ -56,7 +57,7 @@ void Player::makeMove()
 
 }
 
-void Player::attack(int action, NPC person)
+void Player::attack(NPC person)
 {
 
 }
@@ -71,6 +72,4 @@ NPC::NPC()
 }
 
 NPC::~NPC()
-{
-
-}
+{}

@@ -1,6 +1,8 @@
 #include "pch.h"
+
 #include "Ability.h"
 #include "Effect.h"
+#include "Item.h"
 
 #include <iostream>
 #include <string>
@@ -8,20 +10,29 @@
 
 using namespace std;
 
-Ability::Ability() 
+Ability::Ability(){}
+
+int Ability::ApplyCost(Entity user)
 {
-    Name	= " ";
-    Damage	= 0;
-    //toApply	= Effect;
+	return 0;
 }
 
-Ability::Ability(string i_Name, int i_Damage, Effect i_Effect) 
+Ability::~Ability(){}
+
+Physical::Physical(){}
+
+int Physical::ApplyCost(Entity user)
 {
-    Name = i_Name;
-    Damage = i_Damage;
-    //Effect = i_Effect;
+	return 0;
 }
 
-Ability::~Ability() {
+Physical::~Physical(){}
 
+Magical::Magical(){}
+
+int Magical::ApplyCost(Entity user)
+{
+	return 0;
 }
+
+Magical::~Magical(){}

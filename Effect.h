@@ -3,13 +3,14 @@
 
 #include <string>
 #include <vector>
+#include "Entity.h"
 
 using namespace std;
 
 class Effect
 {
 public:
-	string name;
+	string Name;
 	vector<int> statModify[5];
 
 	Effect();

@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "ClassLib.h"
+#include "Ability.h"
+#include "Effect.h"
+#include "Item.h"
+#include "Entity.h"
 #include <iostream>
 
 Classlib::Classlib()
@@ -8,7 +12,7 @@ Classlib::Classlib()
 }
 
 //testing functions with integers as members
-
+/*
 void Classlib::addInt(int number)
 {
 	int *temp = new int[intSize + 1];
@@ -44,9 +48,8 @@ void Classlib::displayInt()
 		std::cout << "Index: " << i << " " << Integers[i] << "\n";
 	}
 }
+*/
 
-
-#ifdef ABILITY_H
 void Classlib::addClass(Ability ability)
 {
 	Ability *temp = new Ability[abilitySize + 1];
@@ -95,7 +98,7 @@ void Classlib::addClass(Effect effect)
 
 void Classlib::addClass(Item item)
 {
-	Item *temp = new item[itemSize + 1];
+	Item *temp = new Item[itemSize + 1];
 
 	for (int i = 0; i < itemSize; i++)
 	{
@@ -106,7 +109,7 @@ void Classlib::addClass(Item item)
 
 	for (int i = 0; i < abilitySize; i++)
 	{
-		Abilities[i] = temp[i];
+		Items[i] = temp[i];
 	}
 
 	Items[itemSize] = item;
@@ -118,7 +121,7 @@ void Classlib::addClass(Item item)
 
 void Classlib::addClass(NPC npc)
 {
-	NPC *temp = new NPC[npcSize + 1];
+	NPC *temp = new NPC[NPCSize + 1];
 
 	for (int i = 0; i < NPCSize; i++)
 	{
@@ -163,7 +166,7 @@ void Classlib::displayAbilities()
 {
 	for (int i = 0; i < abilitySize; i++)
 	{
-		std::cout << "Index: " << i << " " << Abilities[i].name << "\n";
+		std::cout << "Index: " << i << " " << Abilities[i].Name << "\n";
 	}
 }
 
@@ -171,7 +174,7 @@ void Classlib::displayEffects()
 {
 	for (int i = 0; i < effectSize; i++)
 	{
-		std::cout << "Index: " << i << " " << Effects[i].name << "\n";
+		std::cout << "Index: " << i << " " << Effects[i].Name << "\n";
 	}
 }
 
@@ -179,7 +182,7 @@ void Classlib::displayItems()
 {
 	for (int i = 0; i < itemSize; i++)
 	{
-		std::cout << "Index: " << i << " " << Items[i].name << "\n";
+		std::cout << "Index: " << i << " " << Items[i].Name << "\n";
 	}
 }
 
@@ -187,11 +190,9 @@ void Classlib::displayNPCs()
 {
 	for (int i = 0; i < NPCSize; i++)
 	{
-		std::cout << "Index: " << i << " " << NPCs[i].name << "\n";
+		std::cout << "Index: " << i << " " << NPCs[i].Name << "\n";
 	}
 }
-
-#endif
 
 Classlib::~Classlib() 
 {

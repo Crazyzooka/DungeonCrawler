@@ -1,10 +1,13 @@
 #include "pch.h"
-#include "Floorgen.h"
 #include "Functions.h"
+#include "GameData.h"
 #include <iostream>
-//testing
+#include <string>
+
 int main()
 {
+	Entity player = createCharacter();
+
 	int length = FLOORSIZE;
 	int floor[FLOORSIZE][FLOORSIZE];
 
@@ -18,8 +21,8 @@ int main()
 
 	generateFloor(floor, length);
 	generatePath(floor, length - 2);
-
-	printFloor(floor, length);
+	
+	clear();
 
 	return 0;
 }

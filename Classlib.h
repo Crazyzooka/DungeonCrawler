@@ -3,35 +3,40 @@
 
 #include <iostream>
 
+#include "Ability.h"
+#include "Effect.h"
+#include "Item.h"
+#include "Entity.h"
+
 class Classlib
 {
 private:
-
+	/*
 	int intSize = 0;
-	int *Integers = new int[0];
 
-#ifdef ABILITY_H
-	int abilitySize = 1;
-	int effectSize  = 1;
-	int itemSize	= 1;
-	int NPCSize		= 1;
-	Ability *Abilities	= new Ability[1];
-	Effect	*Effects	= new Effect[1];
-	Item	*Items		= new Item[1];
-	NPC		*NPCs		= new NPC[1];
-#endif
+	int *Integers = new int[0];
+	*/
+
+	int abilitySize = 0;
+	int effectSize  = 0;
+	int itemSize	= 0;
+	int NPCSize		= 0;
+
+	Ability *Abilities	= new Ability[0];
+	Effect	*Effects	= new Effect[0];
+	Item	*Items		= new Item[0];
+	NPC		*NPCs		= new NPC[0];
 
 public:
 
 	Classlib();
-
+	/*
 	void addInt(int number);
 
 	int getInt(int index);
 
 	void displayInt();
-
-#ifdef ABILITY_H
+	*/
 	void addClass(Ability ability);
 	void addClass(Effect effect);
 	void addClass(Item item);
@@ -46,7 +51,6 @@ public:
 	void displayEffects();
 	void displayItems();
 	void displayNPCs();
-#endif
 
 	~Classlib();
 };

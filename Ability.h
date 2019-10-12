@@ -3,6 +3,7 @@
 
 #include "Effect.h"
 #include "Entity.h"
+#include "Item.h"
 
 #include <iostream>
 #include <string>
@@ -10,12 +11,13 @@
 
 using namespace std;
 
+class Classlib;
+
 class Ability
 {
 public:
 
     Ability();
-    Ability(string i_Name, int i_Damage, Effect i_Effect);
 
     //VARIABLES
 
@@ -23,11 +25,31 @@ public:
     int Damage;
     Effect toApply;
 
-    vector<Entity> SkillsRequire[];
+    vector<int> SkillsRequire[7];
 
-    virtual int ApplyCost() = 0;
+    int ApplyCost(Entity user);
 
     ~Ability();
+};
+
+class Physical : public Ability
+{
+public:
+	Physical();
+
+	virtual int ApplyCost(Entity user);
+
+	~Physical();
+};
+
+class Magical : public Ability
+{
+public:
+	Magical();
+
+	virtual int ApplyCost(Entity user);
+
+	~Magical();
 };
 
 #endif

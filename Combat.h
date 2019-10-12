@@ -2,21 +2,25 @@
 #define COMBAT_H
 
 #include <string>
+#include "Ability.h"
+#include "Entity.h"
 
 using namespace std;
 
 class Combat
 {
 public:
+
 	int whosTurn;
 	NPC opponent;
 
 	Combat();
 
-	void startCombat(Player user, NPC Room.NPC);
-	void useAbility(int whosTurn, Ability action);
+	void startCombat(Player user, NPC RoomNPC);
+	void usePhysical(Physical action);
+	void useMagical(Magical action);
 	void applyEffect(Entity person);
-	void endCombat(Player user, NPC Room.NPC);
+	void endCombat (Player user, NPC RoomNPC);
 
 	~Combat();
 };

@@ -20,14 +20,14 @@ public:
     string RoomName;
     Entity Player;
     Entity NPC;
-    vector<Item> RoomItems[];
+    vector<Item> RoomItems[1];
     string Description;
     Effect RoomEffect;
     int numNPCs;
     int numItems;
     
     //FUNCTIONS
-    Entity GenerateNPCS(Entity newNPC);
+    void GenerateNPCS(Entity newNPC);
     void ApplyEffect(Entity EffectEntity);
     void GenerateRoom(int numNPCs, Entity NPCs, Effect Effects, Item Items[], int numItems);
 

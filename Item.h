@@ -5,14 +5,15 @@
 #include <string>
 #include <vector>
 
+#include "Entity.h"
+
 using namespace std;
 
-class Item {
+class Item 
+{
 public:
 
 		Item();
-		Item(string i_Name, int i_Value, int i_Weight);
-
 		//VARIABLES
 
 		string Name;
@@ -25,16 +26,13 @@ public:
 
 class Equipment : public Item {
 public:
-	Equipment(string i_Name, int i_Value, int i_Weight);
+	Equipment();
 
 	//VARIABLES
 	int Condition;
 	int Limb;
 
 	vector<int> SkillsRequire[5];
-
-	//FUNCTIONS
-	void SetEquipment(int i_Condition, int i_Limb);
 
 	~Equipment();
 };
@@ -47,7 +45,7 @@ public:
 	int size;
 
 	//FUNCTIONS
-	void ApplyToAll(int Limb);
+	void ApplyToAll(Entity user);
 	void ApplyToLimb(int Limb);
 
 	~Consumable();
@@ -55,8 +53,7 @@ public:
 
 class Armour : public Equipment {
 public:
-	Armour(string i_Name, int i_Value, int i_Weight);
-	void SetDefense(int DefenseHP);
+	Armour();
 
 	//VARIABLES
 	int Defense;
@@ -65,8 +62,7 @@ public:
 
 class Weapon : public Equipment {
 public:
-	Weapon(string i_Name, int i_Value, int i_Weight);
-	void SetDamage(int DamageHP);
+	Weapon();
 
 	//VARIABLES
 	int Damage;

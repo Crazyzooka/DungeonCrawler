@@ -14,10 +14,13 @@ Room::Room() {
 
 }
 
-Entity Room::GenerateNPCS(Entity newNPC){
+void Room::GenerateNPCS(Entity newNPC)
+{
 
 }
-void Room::ApplyEffect(Entity EffectEntity){
+
+void Room::ApplyEffect(Entity EffectEntity)
+{
 
 }
 
