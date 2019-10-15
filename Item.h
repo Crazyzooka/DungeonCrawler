@@ -14,6 +14,7 @@ class Item
 public:
 
 		Item();
+		Item(string i_Name, int i_Value, int i_Weight);
 		//VARIABLES
 
 		string Name;
@@ -45,8 +46,8 @@ public:
 	int size;
 
 	//FUNCTIONS
-	void ApplyToAll(Entity user);
-	void ApplyToLimb(int Limb);
+	void ApplyToAll(Entity user, int amount);
+	void ApplyToLimb(int Limb, int amount);
 
 	~Consumable();
 };
@@ -57,6 +58,9 @@ public:
 
 	//VARIABLES
 	int Defense;
+
+	//FUNCTIONS
+	void SetDefense(int i_Damage);
 	~Armour();
 };
 
@@ -66,6 +70,9 @@ public:
 
 	//VARIABLES
 	int Damage;
+
+	//FUNCTIONS
+	void SetDamage(int i_Damage);
 	~Weapon();
 };
 

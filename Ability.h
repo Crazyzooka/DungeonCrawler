@@ -27,7 +27,7 @@ public:
 
     vector<int> SkillsRequire[7];
 
-    int ApplyCost(Entity user);
+    int ApplyCost(Entity user, int cost);
 
     ~Ability();
 };
@@ -35,9 +35,9 @@ public:
 class Physical : public Ability
 {
 public:
-	Physical();
+	Physical();#include "Entity.h"
 
-	virtual int ApplyCost(Entity user);
+	virtual int ApplyCost(Entity user, int cost);
 
 	~Physical();
 };
@@ -47,7 +47,7 @@ class Magical : public Ability
 public:
 	Magical();
 
-	virtual int ApplyCost(Entity user);
+	virtual int ApplyCost(Entity user, int cost);
 
 	~Magical();
 };
