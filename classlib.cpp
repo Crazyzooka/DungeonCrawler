@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "ClassLib.h"
-#include "Ability.h"
+//#include "Ability.h"
 #include "Effect.h"
-#include "Item.h"
+//#include "Item.h"
 #include "Entity.h"
 #include <iostream>
 
@@ -49,6 +49,7 @@ void Classlib::displayInt()
 	}
 }
 */
+#ifdef ABILITY_H
 
 void Classlib::addClass(Ability ability)
 {
@@ -73,6 +74,23 @@ void Classlib::addClass(Ability ability)
 	delete[] temp;
 }
 
+Ability Classlib::getAbility(int index)
+{
+	return Abilities[index];
+}
+
+void Classlib::displayAbilities()
+{
+	for (int i = 0; i < abilitySize; i++)
+	{
+		std::cout << "Index: " << i << " " << Abilities[i].Name << "\n";
+	}
+}
+
+#endif
+
+#ifdef EFFECT_H
+
 void Classlib::addClass(Effect effect)
 {
 	Effect *temp = new Effect[effectSize + 1];
@@ -95,6 +113,23 @@ void Classlib::addClass(Effect effect)
 
 	delete[] temp;
 }
+
+Effect Classlib::getEffect(int index)
+{
+	return Effects[index];
+}
+
+void Classlib::displayEffects()
+{
+	for (int i = 0; i < effectSize; i++)
+	{
+		std::cout << "Index: " << i << " " << Effects[i].Name << "\n";
+	}
+}
+
+#endif
+
+#ifdef ITEM_H
 
 void Classlib::addClass(Item item)
 {
@@ -119,6 +154,23 @@ void Classlib::addClass(Item item)
 	delete[] temp;
 }
 
+Item Classlib::getItem(int index)
+{
+	return Items[index];
+}
+
+void Classlib::displayItems()
+{
+	for (int i = 0; i < itemSize; i++)
+	{
+		std::cout << "Index: " << i << " " << Items[i].Name << "\n";
+	}
+}
+
+#endif
+
+#ifdef ENTITY_H
+
 void Classlib::addClass(NPC npc)
 {
 	NPC *temp = new NPC[NPCSize + 1];
@@ -142,48 +194,9 @@ void Classlib::addClass(NPC npc)
 	delete[] temp;
 }
 
-Ability Classlib::getAbility(int index)
-{
-	return Abilities[index];
-}
-
-Effect Classlib::getEffect(int index)
-{
-	return Effects[index];
-}
-
-Item Classlib::getItem(int index)
-{
-	return Items[index];
-}
-
 NPC	Classlib::getNPC(int index)
 {
 	return NPCs[index];
-}
-
-void Classlib::displayAbilities()
-{
-	for (int i = 0; i < abilitySize; i++)
-	{
-		std::cout << "Index: " << i << " " << Abilities[i].Name << "\n";
-	}
-}
-
-void Classlib::displayEffects()
-{
-	for (int i = 0; i < effectSize; i++)
-	{
-		std::cout << "Index: " << i << " " << Effects[i].Name << "\n";
-	}
-}
-
-void Classlib::displayItems()
-{
-	for (int i = 0; i < itemSize; i++)
-	{
-		std::cout << "Index: " << i << " " << Items[i].Name << "\n";
-	}
 }
 
 void Classlib::displayNPCs()
@@ -194,15 +207,23 @@ void Classlib::displayNPCs()
 	}
 }
 
+#endif
+
 Classlib::~Classlib() 
 {
+
 #ifdef ABILITY_H
 	delete[] Abilities;
+#endif
+#ifdef EFFECT_H
 	delete[] Effects;
+#endif
+#ifdef ITEM_H
 	delete[] Items;
+#endif
+#ifdef ENTITY_H
 	delete[] NPCs;
 #endif
 
 	std::cout << "Class library destroyed!\n";
-
 };

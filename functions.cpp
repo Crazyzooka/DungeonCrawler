@@ -29,6 +29,24 @@ int random(int limit)
 	return number;
 }
 
+std::string input(std::string u_input)
+{
+	std::string text = u_input;
+
+	int output = u_input.front();
+
+	if (output <= 122 && output >= 97)
+	{
+		output = output - 32;
+	}
+
+	char convert = output;
+
+	text.front() = convert;
+
+	return text;
+}
+
 void wait(float time)
 {
 #ifdef unix
@@ -51,6 +69,7 @@ void display(std::string str)
 		std::cout << str.at(i);
 
 		//if statement to check if it is the end of a sentence, if it is, it waits for 1 second, if it isn't, then it wait's for 50 milliseconds
+		
 		if (str.at(i) == '?' || str.at(i) == '.' || str.at(i) == '!')
 		{
 			wait(1.75);
@@ -58,12 +77,10 @@ void display(std::string str)
 			if (i + 1 < length && str.at(i + 1) != str.at(i))
 			{
 				std::cout << "\n";
-
 				if (i + 1 < length && str.at(i + 1) == ' ')
 				{
 					i++;
 				}
-
 			}
 		}
 		else if (str.at(i) == ',')
@@ -74,16 +91,17 @@ void display(std::string str)
 		{
 			wait(0.05);
 		}
+
+		if (i == length - 1)
+		{
+			std::cout << std::endl;
+		}
 		
 		//flushes out cout chars
 		std::cout.flush();
 	}
-}
 
-void clear()
-{
-	std::cout << std::endl;
-	std::cout << std::endl;
+
 }
 
 //prints out the entire floor using characters as ASCII picture
@@ -102,7 +120,7 @@ void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 			{
 			case 0:
 			{
-				std::cout << "- ";
+				std::cout << "  ";
 				break;
 			}
 			case 1:
@@ -120,6 +138,11 @@ void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 				std::cout << "2 ";
 				break;
 			}
+			case 4:
+			{
+				std::cout << "X ";
+				break;
+			}
 			}
 		}
 
@@ -131,6 +154,7 @@ void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 
 void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 {
+	//std::cout << "generating path\n";
 	int xentry, yentry, xexit, yexit, xfirst, yfirst, counter, direction;
 
 	counter = 0;
@@ -171,15 +195,13 @@ void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 			yfirst = yexit;
 		}
 
-		std::cout << "generating path\n";
-
 		//while loop for the amount of steps it should take
 		while (counter < length)
 		{
 			//gets direction it should walk
 
 			direction = random(4);
-			std::cout << direction << "\n";
+			//std::cout << direction << "\n";
 
 			//switch case depending on the random number to walk towards, if not possible it will go to the next case until it finds something possible
 
@@ -254,7 +276,7 @@ void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 
 		}
 
-		std::cout << "path generated!\n";
+		//std::cout << "path generated!\n";
 		counter = 0;
 
 	}
@@ -264,6 +286,8 @@ void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 
 void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 {
+	//std::cout << "generating connection\n";
+
 	//randomly generates entrance position
 
 	int xentry, yentry, xexit, yexit;
@@ -296,14 +320,12 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 
 	direction = 0;
 
-	std::cout << "generating connection\n";
-
 	while (true)
 	{
 		//same switch case algorithm as the path generator
 
 		direction = random(2);
-		std::cout << direction << "\n";
+		//std::cout << direction << "\n";
 
 		//these if statements filter the switch cases so that it leads the walk towards the exit
 
@@ -456,7 +478,7 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 
 		if ((xfirst == xsecond && yfirst + 1 == ysecond) || (xfirst == xsecond && yfirst - 1 == ysecond) || (xfirst + 1 == xsecond && yfirst == ysecond) || (xfirst - 1 == xsecond && yfirst == ysecond))
 		{
-			std::cout << "second coordinate reached!\n";
+			//std::cout << "second coordinate reached!\n";
 			break;
 		}
 	}
@@ -465,4 +487,6 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 
 	matrix[xentry][yentry] = 1;
 	matrix[xexit][yexit] = 3;
+
+	generatePath(matrix, size - 2);
 }

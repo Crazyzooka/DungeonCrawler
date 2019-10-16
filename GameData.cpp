@@ -12,35 +12,32 @@
 
 Entity createCharacter()
 {
-	std::string input;
+	std::string u_input;
 
-	std::cout << "Would you like to skip the intro? ";
-	std::cin >> input;
+	display("Would you like to skip the intro? ");
+	std::getline(std::cin, u_input);
+	u_input = input(u_input);
 
-	Entity x;
+	std::cout << "\n\n";
+
 	Player player;
 	player.isPlayer = true;
-	std::cout << player.ID;
 
-	if (input == "No" || input == "no" || input == "N" || input == "n") {
-
+	if (u_input == "No" || u_input == "N") 
+	{
 		wait(1.75);
 		display("Hey, you're awake. You're so close already, the tower's just up ahead, don't give up now. Relax, everyone's gone through it before. It's just a matter of getting used to it. 'Cause once you know it from the inside-out, you'll be fine.");
-
-
-		display("Say, what's your name?\n");
-
-		std::string temp;
-		std::cin >> temp;
-		player.Name = temp;
-
-		clear();
-		wait(1.75);
-
-		display(temp + " is it? That's a cool name, it's not one I hear a lot around these parts. Now I'm curious, what makes you SPECIAL?");
 	}
+	display("Say, what's your name?\n");
 
-	clear();
+	std::string temp;
+	std::getline(std::cin, temp);
+	player.Name = temp;
+
+	std::cout << "\n\n";
+	wait(1.75);
+
+	display(temp + " is it? That's a cool name, it's not one I hear a lot around these parts. I'm curious, what makes you SPECIAL?\n\n");
 
 	int * tempPtr = new int[7];
 	for (int i = 0; i < 7; i++)
@@ -63,15 +60,26 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Strength] + allocate > 100 || tempPtr[Strength] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Strength] + allocate > 100 || tempPtr[Strength] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					break;
+					std::cout << std::endl;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+
+			cin.clear();
+			cin.ignore();
+
 		}
 
 		tempPtr[Strength] = tempPtr[Strength] + allocate;
@@ -86,15 +94,25 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Perception] + allocate > 100 || tempPtr[Perception] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Perception] + allocate > 100 || tempPtr[Perception] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					break;
+					std::cout << std::endl;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
+
 		}
 
 		tempPtr[Perception] = tempPtr[Perception] + allocate;
@@ -109,15 +127,24 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Endurance] + allocate > 100 || tempPtr[Endurance] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Endurance] + allocate > 100 || tempPtr[Endurance] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					break;
+					std::cout << std::endl;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
 		}
 
 		tempPtr[Endurance] = tempPtr[Endurance] + allocate;
@@ -132,15 +159,24 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Charisma] + allocate > 100 || tempPtr[Charisma] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Charisma] + allocate > 100 || tempPtr[Charisma] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					std::cout << std::endl;
+					break;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
 		}
 
 		tempPtr[Charisma] = tempPtr[Charisma] + allocate;
@@ -155,15 +191,24 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Intelligence] + allocate > 100 || tempPtr[Intelligence] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Intelligence] + allocate > 100 || tempPtr[Intelligence] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					std::cout << std::endl;
+					break;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
 		}
 
 		tempPtr[Intelligence] = tempPtr[Intelligence] + allocate;
@@ -178,15 +223,24 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Agility] + allocate > 100 || tempPtr[Agility] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Agility] + allocate > 100 || tempPtr[Agility] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					std::cout << std::endl;
+					break;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
 		}
 
 		tempPtr[Agility] = tempPtr[Agility] + allocate;
@@ -201,15 +255,24 @@ Entity createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (tempPtr[Luck] + allocate > 100 || tempPtr[Luck] + allocate < 0)
+			if (cin.good())
 			{
-				std::cout << "Can't exceed 0 or 100.\n";
+				if (tempPtr[Luck] + allocate > 100 || tempPtr[Luck] + allocate < 0)
+				{
+					std::cout << "Can't exceed 0 or 100.\n";
+				}
+				else if (points - allocate < 0)
+				{
+					std::cout << "Not enough points.\n";
+				}
+				else
+				{
+					std::cout << std::endl;
+					break;
+				}
 			}
-			else
-			{
-				break;
-				std::cout << std::endl;
-			}
+			cin.clear();
+			cin.ignore();
 		}
 
 		tempPtr[Luck] = tempPtr[Luck] + allocate;
@@ -218,13 +281,17 @@ Entity createCharacter()
 		if (points > 0)
 		{
 			std::cout << "You still have left over skill points, would you like to go back? ";
-			cin >> input;
+			cin >> u_input;
+			u_input = input(u_input);
 
-			if (input == "No" || input == "no" || input == "N" || input == "n")
+			if (u_input == "No" || u_input == "N")
 			{
 				break;
 			}
 		}
+
+		std::cin.clear();
+		std::cin.ignore();
 	}
 
 	return player;
