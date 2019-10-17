@@ -1,5 +1,3 @@
-#include "pch.h"
-
 #include "Ability.h"
 #include "Effect.h"
 #include "Item.h"
