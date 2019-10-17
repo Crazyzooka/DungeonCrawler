@@ -1,5 +1,3 @@
-#include "pch.h"
-
 #include "Functions.h"
 #include "GameData.h"
 #include "ClassLib.h"
