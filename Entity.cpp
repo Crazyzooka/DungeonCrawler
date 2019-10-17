@@ -45,7 +45,7 @@ void Player::useItem(Item item, Entity entity)
 
 void Player::viewCharacter()
 {
-	for (int i = 0; i<stats.length; i++)
+  for (int i = 0; i<stats.size(); i++)
 	{
 		switch (i)
 		{
