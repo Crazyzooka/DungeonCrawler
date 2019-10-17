@@ -13,7 +13,7 @@ enum stats
 	Intelligence = 4,
 	Agility = 5,
 	Luck = 6
-	Experience = 7;
+	Experience = 7
 };
 
 enum limbs
