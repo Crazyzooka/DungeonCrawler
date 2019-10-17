@@ -33,7 +33,7 @@ public:
 class Physical : public Ability
 {
 public:
-	Physical();#include "Entity.h"
+	Physical();
 
 	virtual int ApplyCost(Entity user, int cost);
 
