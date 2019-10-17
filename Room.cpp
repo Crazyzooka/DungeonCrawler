@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Item.h"
 #include "Room.h"
 #include "Entity.h"
