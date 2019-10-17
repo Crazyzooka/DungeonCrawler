@@ -50,25 +50,28 @@ void Player::viewCharacter()
 		switch (i)
 		{
 			case 0:
-			cout << "Strength: " << stats[i] << endl;
+			cout << "STRENGTH: " << stats[i] << endl;
 			break;
 			case 1:
-			cout << "Perception: " << stats[i] << endl;
+			cout << "PERCEPTION: " << stats[i] << endl;
 			break;
 			case 2:
-			cout << "Endurance: " << stats[i] << endl;
+			cout << "ENDURANCE: " << stats[i] << endl;
 			break;
 			case 3:
-			cout << "Charisma: " << stats[i] << endl;
+			cout << "CHARISMA: " << stats[i] << endl;
 			break;
 			case 4:
-			cout << "Intelligence: " << stats[i] << endl;
+			cout << "INTELLIGENCE: " << stats[i] << endl;
 			break;
 			case 5:
-			cout << "Agility: " << stats[i] << endl;
+			cout << "AGILITY: " << stats[i] << endl;
 			break;
 			case 6:
-			cout << "Luck: " << stats[i] << endl;
+			cout << "LUCK: " << stats[i] << endl;
+			break;
+			case 7:
+			cout << "EXPERIENCE: " << stats[i] << endl;
 			break;
 		}
 	}
@@ -76,12 +79,13 @@ void Player::viewCharacter()
 
 void Player::levelUp()
 {
-
+	if (stats[7] == 100)
+	{
+		level = level++;
+		stats[7] = 0;
+	}
 }
-void Player::makeMove()
-{
 
-}
 
 void Player::attack(NPC person)
 {
