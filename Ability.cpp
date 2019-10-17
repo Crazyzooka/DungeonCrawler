@@ -10,7 +10,7 @@ using namespace std;
 
 Ability::Ability(){}
 
-int Ability::ApplyCost(Entity user)
+int Ability::ApplyCost(Entity user, int cost)
 {
 	return 0;
 }
@@ -19,7 +19,7 @@ Ability::~Ability(){}
 
 Physical::Physical(){}
 
-int Physical::ApplyCost(Entity user)
+int Physical::ApplyCost(Entity user, int cost)
 {
 	return 0;
 }
@@ -28,7 +28,7 @@ Physical::~Physical(){}
 
 Magical::Magical(){}
 
-int Magical::ApplyCost(Entity user)
+int Magical::ApplyCost(Entity user, int cost)
 {
 	return 0;
 }

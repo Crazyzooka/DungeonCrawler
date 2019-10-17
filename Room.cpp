@@ -14,22 +14,21 @@ Room::Room() {
 }
 
 void Room::GenerateNPCS(Entity newNPC)
-{
-
+{   
+    NPC = newNPC;
 }
 
-void Room::ApplyEffect(Entity EffectEntity)
+void Room::ApplyEffect(Entity Entity)
 {
-
+    //Entity.Effect = RoomEffect;
 }
 
-void Room::GenerateRoom(int numNPCs, Entity NPCs, Effect Effects, Item Items[], int numItems){
+void Room::GenerateRoom(int numNPCs, Entity NPCs, Effect Effects, vector<Item> Items, int numItems){
     NPC = NPCs;
     Effect Afflict = Effects;
     
-    for(int i = 0; i < numItems; i++) {
-        RoomItems[i].push_back(Items[i]);
-    }
+    //RoomItems.push_back(Items);
+    
 }
 
 Room::~Room() {

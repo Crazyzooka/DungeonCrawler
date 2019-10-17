@@ -27,7 +27,7 @@ public:
 
 class Equipment : public Item {
 public:
-	Equipment();
+	Equipment(string i_Name, int i_Value, int i_Weight);
 
 	//VARIABLES
 	int Condition;
@@ -35,26 +35,30 @@ public:
 
 	vector<int> SkillsRequire[5];
 
+	//FUNCTIONS
+	
+
 	~Equipment();
 };
 
 class Consumable : public Item {
 public:
-	Consumable();
+	Consumable(string i_Name, int i_Value, int i_Weight);
 
 	//VARIABLES
 	int size;
 
 	//FUNCTIONS
-	void ApplyToAll(Entity user, int amount);
-	void ApplyToLimb(int Limb, int amount);
+	void setSize(int i_size);
+	void ApplyToAll(Entity Entity);
+	void ApplyToLimb(Entity Entity, int Limb);
 
 	~Consumable();
 };
 
 class Armour : public Equipment {
 public:
-	Armour();
+	Armour(string i_Name, int i_Value, int i_Weight);
 
 	//VARIABLES
 	int Defense;
@@ -66,7 +70,7 @@ public:
 
 class Weapon : public Equipment {
 public:
-	Weapon();
+	Weapon(string i_Name, int i_Value, int i_Weight);
 
 	//VARIABLES
 	int Damage;

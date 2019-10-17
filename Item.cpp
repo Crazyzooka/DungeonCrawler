@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Item.h"
 #include "Entity.h"
 
@@ -25,7 +27,7 @@ Item::~Item() {
 
 }
 
-Equipment::Equipment() {
+Equipment::Equipment(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {
 	Condition = 0;
 	Limb = 0;
 }
@@ -34,7 +36,7 @@ Equipment::~Equipment() {
 
 }
 
-Armour::Armour()
+Armour::Armour(string i_Name, int i_Value, int i_Weight):Equipment(i_Name, i_Value, i_Weight)
 {
 	Defense = 0;
 }
@@ -47,7 +49,7 @@ Armour::~Armour() {
 
 }
 
-Weapon::Weapon() 
+Weapon::Weapon(string i_Name, int i_Value, int i_Weight):Equipment(i_Name, i_Value, i_Weight)
 {
 	Damage = 0;
 }
@@ -60,18 +62,22 @@ Weapon::~Weapon() {
 
 }
 
-Consumable::Consumable() {
-
+Consumable::Consumable(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {
+	size = 0;
 }
 
-void Consumable::ApplyToAll(Entity Entity, int amount) {
+void Consumable::setSize(int i_size) {
+	size = i_size;
+}
+
+void Consumable::ApplyToAll(Entity Entity) {
 	for (int i = 0; i < 6; i++) {
-		LimbHP[i] -= amount;
+		Entity.limbHP[i] -= size;
 	}
 }
 
-void Consumable::ApplyToLimb(int Limb, int amount) {
-	LimbHP[Limb] -= amount;
+void Consumable::ApplyToLimb(Entity Entity, int Limb) {
+	Entity.limbHP[Limb] -= size;
 }
 
 Consumable::~Consumable() {
