@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#ifdef unix
+#ifdef __linux
 #include <unistd.h>
 #endif
 
@@ -48,7 +48,7 @@ std::string input(std::string u_input)
 
 void wait(float time)
 {
-#ifdef unix
+#ifdef __linux
 	usleep(1000000 * time);
 #endif
 #ifdef _WIN32
@@ -59,6 +59,9 @@ void wait(float time)
 void display(std::string str)
 {
 	//gets string length
+	#ifdef __linux
+	std::cout << "Linux computer\n";
+	#endif
 
 	int length = str.length();
 
