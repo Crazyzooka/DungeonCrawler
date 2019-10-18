@@ -15,7 +15,7 @@ public:
 		static int currentID;
 
 		//VARIABLES
-		string name;
+		string Name;
 		string species;
 
 		vector<string> abilities;		//Array to store abilities

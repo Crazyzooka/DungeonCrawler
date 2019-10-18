@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Functions.h"
 #include "GameData.h"
 #include <iostream>
@@ -12,19 +14,6 @@ int main()
 	int length = FLOORSIZE;
 	int floor[FLOORSIZE][FLOORSIZE];
 
-	for (int i = 0; i < length; i++)
-	{
-		for (int j = 0; j < length; j++)
-		{
-			floor[j][i] = 0;
-		}
-	}
-	
-	//generates floor
-	generateFloor(floor, length);
-	//prints floor
-	//printFloor(floor, length);
-
 	//initialises game variables to be used
 	std::string userInput;
 	int userx, usery, newFloor, lastRoom, currentRoom;
@@ -34,6 +23,18 @@ int main()
 	{
 		if (newFloor == 1)
 		{
+			//sets all indices of the floor array to 0 to start anew
+			for (int i = 0; i < length; i++)
+			{
+				for (int j = 0; j < length; j++)
+				{
+					floor[j][i] = 0;
+				}
+			}
+
+			//Generates new floor
+			generateFloor(floor, length);
+
 			for (int i = 0; i < length; i++)
 			{
 				for (int j = 0; j < length; j++)
@@ -50,7 +51,7 @@ int main()
 
 						wait(1.75);
 						
-						display("You grab onto the ladder, one step at a time, and descend further into the abyss.");
+						display("You grab onto the ladder, and descend further into the abyss, one step at a time.");
 					}
 				}
 			}
@@ -58,7 +59,6 @@ int main()
 
 		printFloor(floor, length);
 
-		/*
 		display("There are paths going: ");
 		if (usery - 1 >= 0 && floor[userx][usery - 1] != 0)
 		{
@@ -76,7 +76,14 @@ int main()
 		{
 			display("- West");
 		}
-		*/
+		if (currentRoom == 1)
+		{
+			display("There's an entrance here.");
+		}
+		if (currentRoom == 3)
+		{
+			display("There's an exit here.");
+		}
 
 		while (true)
 		{
@@ -132,6 +139,18 @@ int main()
 
 					break;
 				}
+				if (userInput == "Up" && currentRoom == 1)
+				{
+					floor[userx][usery] = currentRoom;
+					newFloor = 1;
+					break;
+				}
+				if (userInput == "Down" && currentRoom == 3)
+				{
+					floor[userx][usery] = currentRoom;
+					newFloor = 1;
+					break;
+				}
 
 				display("You can't go that way.");
 			}
@@ -163,11 +182,10 @@ int main()
 			}
 			else
 			{
-				display("You stand there in confusion, what is " + userInput + "?");
+				display("What is " + userInput + "? If you need help, type 'help'.");
 			}
 		}
 	}
-
 
 	return 0;
 }

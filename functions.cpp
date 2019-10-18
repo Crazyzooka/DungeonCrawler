@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Functions.h"
 #include <iostream>
 
@@ -11,7 +13,9 @@
 #endif
 
 #ifdef _WIN32
+
 #include <windows.h>
+
 #endif
 
 //wait function that is compatible with windows and linux versions

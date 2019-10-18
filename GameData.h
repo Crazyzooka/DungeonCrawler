@@ -12,8 +12,8 @@ enum stats
 	Charisma = 3,
 	Intelligence = 4,
 	Agility = 5,
-	Luck = 6
-	Experience = 7
+	Luck = 6,
+	Experience = 7,
 };
 
 enum limbs
@@ -23,7 +23,7 @@ enum limbs
 	ArmR = 2,
 	ArmL = 3,
 	LegR = 4,
-	LegL = 5
+	LegL = 5,
 };
 
 Entity createCharacter();

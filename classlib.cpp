@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Classlib.h"
 //#include "Ability.h"
 #include "Effect.h"
