@@ -8,7 +8,7 @@
 int main()
 {
 	// creates character
-	Entity player = createCharacter();
+	Player player = createCharacter();
 
 	//initialise floor array to generate floors on
 	int length = FLOORSIZE;
@@ -58,6 +58,16 @@ int main()
 		}
 
 		printFloor(floor, length);
+		if (currentRoom == 1)
+		{
+			display("There's an entrance here.");
+		}
+		if (currentRoom == 3)
+		{
+			display("There's an exit here.");
+		}
+
+		std::cout << std::endl;
 
 		display("There are paths going: ");
 		if (usery - 1 >= 0 && floor[userx][usery - 1] != 0)
@@ -75,14 +85,6 @@ int main()
 		if (userx - 1 >= 0 && floor[userx - 1][usery] != 0)
 		{
 			display("- West");
-		}
-		if (currentRoom == 1)
-		{
-			display("There's an entrance here.");
-		}
-		if (currentRoom == 3)
-		{
-			display("There's an exit here.");
 		}
 
 		while (true)
@@ -175,10 +177,23 @@ int main()
 				{
 					printFloor(floor, length);
 				}
+
+				if (userInput == "Character")
+				{
+					player.viewCharacter();
+				}
 			}
 			else if (userInput == "Attack")
 			{
 
+			}
+			else if (userInput == "Help")
+			{
+				std::cout << "(Move/Go) (North/East/South/West/Up/Down)\n";
+				std::cout << "(Open) (Character/NPC)\n";
+				std::cout << "(Take/Buy/Give/Sell) (Item)\n";
+				std::cout << "(View) (Map/Character/NPC/Room)\n";
+				std::cout << "(Attack) (NPC)\n";
 			}
 			else
 			{

@@ -11,7 +11,7 @@
 using namespace std;
 int Entity::currentID = 0;
 
-Entity::Entity()					//Creating an empty entity
+Entity::Entity()				//Creating an empty entity
 {
 	Name = "?";
 	level = 1;

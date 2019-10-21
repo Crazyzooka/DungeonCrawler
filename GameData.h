@@ -26,7 +26,7 @@ enum limbs
 	LegL = 5,
 };
 
-Entity createCharacter();
+Player createCharacter();
 Classlib createGameData();
 
 #endif

@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Entity createCharacter()
+Player createCharacter()
 {
 	std::string u_input;
 
@@ -293,6 +293,13 @@ Entity createCharacter()
 		std::cin.clear();
 		std::cin.ignore();
 	}
+
+	for (int i = 0; i < 7; i++)
+	{
+		player.stats[i] = tempPtr[i];
+	}
+
+	delete[] tempPtr;
 
 	return player;
 }

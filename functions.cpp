@@ -115,6 +115,7 @@ void display(std::string str)
 void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 {
 	std::cout << "\n";
+	wait(1);
 
 	//switch case for each type of cell in the array possible, and displays the character
 
@@ -154,6 +155,9 @@ void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 
 		std::cout << "\n";
 	}
+
+	std::cout << "\n";
+	wait(1);
 }
 
 //generates a random path from the entrance and exit
