@@ -10,29 +10,31 @@
 
 using namespace std;
 
-Ability::Ability(){}
+Ability::Ability(){
+	Name = "?";
+}
 
-int Ability::ApplyCost(Entity user, int cost)
+int Ability::ApplyCost()
 {
-	return 0;
+	return Damage;
 }
 
 Ability::~Ability(){}
 
 Physical::Physical(){}
 
-int Physical::ApplyCost(Entity user, int cost)
+int Physical::ApplyCost()
 {
-	return 0;
+	return Damage;
 }
 
 Physical::~Physical(){}
 
 Magical::Magical(){}
 
-int Magical::ApplyCost(Entity user, int cost)
+int Magical::ApplyCost()
 {
-	return 0;
+	return Damage;
 }
 
 Magical::~Magical(){}
