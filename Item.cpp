@@ -41,10 +41,6 @@ Armour::Armour(string i_Name, int i_Value, int i_Weight):Equipment(i_Name, i_Val
 	Defense = 0;
 }
 
-void Armour::SetDefense(int i_Defense) {
-	Defense = i_Defense;
-}
-
 Armour::~Armour() {
 
 }
@@ -54,20 +50,12 @@ Weapon::Weapon(string i_Name, int i_Value, int i_Weight):Equipment(i_Name, i_Val
 	Damage = 0;
 }
 
-void Weapon::SetDamage(int i_Damage) {
-	Damage = i_Damage;
-}
-
 Weapon::~Weapon() {
 
 }
 
 Consumable::Consumable(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {
 	size = 0;
-}
-
-void Consumable::setSize(int i_size) {
-	size = i_size;
 }
 
 void Consumable::ApplyToAll(Entity Entity) {

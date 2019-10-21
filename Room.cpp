@@ -1,5 +1,3 @@
-#include "pch.h"
-
 #include "Item.h"
 #include "Room.h"
 #include "Entity.h"
@@ -25,12 +23,16 @@ void Room::ApplyEffect(Entity Entity)
     //Entity.Effect = RoomEffect;
 }
 
-void Room::GenerateRoom(int numNPCs, Entity NPCs, Effect Effects, vector<Item> Items, int numItems){
+void Room::GenerateRoom(Entity NPCs, Effect Effects, int numItems){
     NPC = NPCs;
     Effect Afflict = Effects;
     
     //RoomItems.push_back(Items);
     
+}
+
+Entity Room::GetNPC() {
+    return NPC;
 }
 
 Room::~Room() {

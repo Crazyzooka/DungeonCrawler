@@ -25,5 +25,5 @@ void Effect::changeStats(Entity person)
 
 Effect::~Effect()
 {
-
+	cout << "I used to be someone..." << endl;
 }

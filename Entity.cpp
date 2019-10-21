@@ -22,7 +22,7 @@ Entity::Entity()					//Creating an empty entity
 
 Entity::~Entity()
 {
-	cout << "I used to be someone..." << endl;
+	cout << "This room is warm..." << endl;
 }
 
 Player::Player()

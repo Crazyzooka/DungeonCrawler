@@ -23,13 +23,13 @@ public:
     vector<Item> RoomItems;
     string Description;
     Effect RoomEffect;
-    int numNPCs;
     int numItems;
     
     //FUNCTIONS
     void GenerateNPCS(Entity newNPC);
     void ApplyEffect(Entity EffectEntity);
-    void GenerateRoom(int numNPCs, Entity NPCs, Effect Effects, vector<Item> Items, int numItems);
+    void GenerateRoom(Entity NPCs, Effect Effects, int numItems);
+    Entity GetNPC();
 
     ~Room();
 };
