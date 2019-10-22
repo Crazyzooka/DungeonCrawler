@@ -28,7 +28,7 @@ public:
     //FUNCTIONS
     void GenerateNPCS(Entity newNPC);
     void ApplyEffect(Entity EffectEntity);
-    void GenerateRoom(Entity NPCs, Effect Effects, int numItems);
+    void GenerateRoom(Entity NPCs, Effect Effects, Entity Player);
     Entity GetNPC();
 
     ~Room();

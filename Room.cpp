@@ -24,7 +24,7 @@ void Room::ApplyEffect(Entity Entity)
     //Entity.Effect = RoomEffect;
 }
 
-void Room::GenerateRoom(Entity NPCs, Effect Effects, int numItems){
+void Room::GenerateRoom(Entity NPCs, Effect Effects, Entity Player){
     NPC = NPCs;
     Effect Afflict = Effects;
     

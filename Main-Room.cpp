@@ -3,6 +3,8 @@
 #include "Item.h"
 #include "Entity.h"
 #include "Effect.h"
+#include "Classlib.h"
+#include "Functions.h"
 
 #include "Room.cpp"
 
@@ -12,7 +14,21 @@
 
 using namespace std;
 
-int main() {
+void createRoom(Classlib *library, int Description, Entity Player) {
+    Room MonsterRoom;
+    int numItems = 5; //random();
+
+    MonsterRoom.GenerateRoom(library->getNPC(myRandom(library->NPCSize)), library->getEffect(myRandom(library->effectSize)), Player);
+    MonsterRoom.Player = Player;
+    MonsterRoom.RoomName = "Room";
+
+    for(int i = 0; i < numItems; i++) {
+        MonsterRoom.RoomItems[i] = library->getItem(myRandom(library->itemSize));
+    }
+    
+}
+
+/*int main() {
     //ENTITIES
     Player Player1;
     NPC Merchant;
@@ -70,11 +86,7 @@ int main() {
     EmptyRoom.RoomName = "Empty Room"
 
     //MONSTER ROOM 1
-    Room MonsterRoom1;
-    MonsterRoom1.GenerateRoom(Monster1, Cold, 0);
-    MonsterRoom1.RoomItems = ItemsEmpty;
-    MonsterRoom1.Player = Player1;
-    MonsterRoom1.RoomName = "MonsterRoom1"
+
 
     //MONSTER ROOM 1
     Room BossRoom1;
@@ -86,3 +98,4 @@ int main() {
 
     return 0;
 }
+*/
