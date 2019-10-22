@@ -103,6 +103,7 @@ int main()
 
 		while (true)
 		{
+			std::cout << "Command: ";
 			std::cin >> userInput;
 			userInput = input(userInput);
 
@@ -172,6 +173,20 @@ int main()
 			}
 			else if (userInput == "Open")
 			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+
+				if (userInput == "Character")
+				{
+					std::cin >> userInput;
+					userInput = input(userInput);
+
+					if (userInput == "Back")
+					{
+
+					}
+
+				}
 
 			}
 			else if (userInput == "View")
@@ -197,7 +212,7 @@ int main()
 			{
 				std::cout << "(Move/Go) (North/East/South/West/Up/Down)\n";
 				std::cout << "(Open) (Character/NPC)\n";
-				std::cout << "(Use/Equip/Take/Buy/Give/Sell) (Item)\n";
+				std::cout << "(Use/Equip/Unequip/Take/Buy/Give/Sell) (Item)\n";
 				std::cout << "(Back) To go back from inventories.\n";
 				std::cout << "(View) (Map/Character/NPC/Room)\n";
 				std::cout << "(Attack) (NPC)\n";

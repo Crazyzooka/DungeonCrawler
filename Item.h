@@ -31,7 +31,7 @@ public:
 	Equipment(string i_Name, int i_Value, int i_Weight);
 	int Condition;
 	int Limb;
-	vector<int> SkillsRequire[5];
+	vector<int> SkillsRequire = { 0,0,0,0,0,0,0 };
 	~Equipment();
 };
 

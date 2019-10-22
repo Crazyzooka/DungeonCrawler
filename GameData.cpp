@@ -310,7 +310,59 @@ void ChooseStats(Player * player)
 
 void ChooseAbilities(Player * player, Classlib * library)
 {
-	
+	int counter = 0;
+	int valid = 0;
+	int tempAdd = 0;
+
+	for (int i = 0; i < library->abilitySize; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+			{
+				valid = 0;
+				break;
+			}
+
+			valid++;
+		}
+
+		if (valid == 7)
+		{
+			counter++;
+			valid = 0;
+		}
+	}
+
+	Ability * temp = new Ability[counter];
+
+	for (int i = 0; i < library->abilitySize; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+			{
+				valid = 0;
+				break;
+			}
+
+			valid++;
+		}
+
+		if (valid == 7)
+		{
+			temp[tempAdd] = library->getAbility(tempAdd);
+			tempAdd++;
+			valid = 0;
+		}
+	}
+
+	for (int i = 0; i < counter; i++)
+	{
+		std::cout << i << " " << temp[i].Name << "\n";
+	}
+
+	std::cout << "\nWhich ability would you like to learn?\n";
 }
 
 void ChooseItems(Player * player, Classlib * library)

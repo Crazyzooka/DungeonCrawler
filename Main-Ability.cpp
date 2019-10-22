@@ -17,7 +17,7 @@ void createAbilities(Classlib * library)
 	library->addClass(Burning);
 
 	Ability Slash = Ability();
-	Slash.Name = "Burning";
+	Slash.Name = "Slash";
 	Slash.Damage = 100;
 
 	library->addClass(Slash);

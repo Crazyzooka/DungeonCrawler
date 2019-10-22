@@ -23,7 +23,7 @@ public:
     int Damage;
     Effect toApply;
 
-    vector<int> SkillsRequire[7];
+	vector<int> SkillsRequire = { 0,0,0,0,0,0,0 };
 
     virtual int ApplyCost();
 
