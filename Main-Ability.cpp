@@ -1,16 +1,17 @@
-#include "Ability.cpp"
-#include "Effect.cpp"
+#include "pch.h"
+
+#include "Ability.h"
+#include "Effect.h"
+#include "Classlib.h"
 
 #include <iostream>
 
 using namespace std;
 
-int main() {
+void createAbilities(Classlib library)
+{
     Ability Burning = Ability();
     Burning.Name = "Burning";
     Burning.Damage = 100;
 
-    cout << Burning.ApplyCost() << endl;
-
-    return 0;
 }

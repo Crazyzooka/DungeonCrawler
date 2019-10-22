@@ -23,8 +23,13 @@ Item::Item(string i_Name, int i_Value, int i_Weight)
     Weight	= i_Weight;
 }
 
-Item::~Item() {
+void Item::test()
+{
+	std::cout << "Tested: " << Name << "\n";
+}
 
+Item::~Item() {
+	
 }
 
 Equipment::Equipment(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {

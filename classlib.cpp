@@ -143,7 +143,7 @@ void Classlib::addClass(Item item)
 
 	Items = new Item[itemSize + 1];
 
-	for (int i = 0; i < abilitySize; i++)
+	for (int i = 0; i < itemSize; i++)
 	{
 		Items[i] = temp[i];
 	}

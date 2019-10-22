@@ -8,6 +8,7 @@
 #include "Classlib.h"
 #include "GameData.h"
 #include "Functions.h"
+
 using namespace std;
 
 void createEntity(Classlib library)

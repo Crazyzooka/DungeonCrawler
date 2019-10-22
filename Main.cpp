@@ -5,8 +5,15 @@
 #include <iostream>
 #include <string>
 
+extern void createItems(Classlib * library);
+
 int main()
 {
+	Classlib * library = new Classlib();
+	createItems(library);
+
+	library->displayItems();
+
 	// creates character
 	Player player = createCharacter();
 

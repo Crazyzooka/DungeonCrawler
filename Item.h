@@ -19,6 +19,9 @@ public:
 		vector<string> Effects;
 		int Value;
 		int Weight;
+
+		void test();
+
 		~Item();
 };
 
