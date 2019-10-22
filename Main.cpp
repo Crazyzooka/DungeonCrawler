@@ -2,6 +2,8 @@
 
 #include "Functions.h"
 #include "GameData.h"
+#include "Classlib.h"
+
 #include <iostream>
 #include <string>
 
@@ -12,10 +14,10 @@ int main()
 	Classlib * library = new Classlib();
 	createItems(library);
 
-	library->displayItems();
-
 	// creates character
-	Player player = createCharacter();
+	Player * player = new Player();
+
+	CreateChar(player);
 
 	//initialise floor array to generate floors on
 	int length = FLOORSIZE;
@@ -167,14 +169,6 @@ int main()
 			{
 
 			}
-			else if (userInput == "Take")
-			{
-
-			}
-			else if (userInput == "Give")
-			{
-
-			}
 			else if (userInput == "View")
 			{
 				std::cin >> userInput;
@@ -198,7 +192,8 @@ int main()
 			{
 				std::cout << "(Move/Go) (North/East/South/West/Up/Down)\n";
 				std::cout << "(Open) (Character/NPC)\n";
-				std::cout << "(Take/Buy/Give/Sell) (Item)\n";
+				std::cout << "(Use/Equip/Take/Buy/Give/Sell) (Item)\n";
+				std::cout << "(Back) To go back from inventories.\n";
 				std::cout << "(View) (Map/Character/NPC/Room)\n";
 				std::cout << "(Attack) (NPC)\n";
 			}
@@ -208,6 +203,8 @@ int main()
 			}
 		}
 	}
+
+	delete library;
 
 	return 0;
 }

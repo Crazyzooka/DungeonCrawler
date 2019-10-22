@@ -11,11 +11,6 @@
 class Classlib
 {
 private:
-	/*
-	int intSize = 0;
-
-	int *Integers = new int[0];
-	*/
 
 	int abilitySize = 0;
 	int effectSize  = 0;
@@ -30,13 +25,7 @@ private:
 public:
 
 	Classlib();
-	/*
-	void addInt(int number);
 
-	int getInt(int index);
-
-	void displayInt();
-	*/
 	void addClass(Ability ability);
 	void addClass(Effect effect);
 	void addClass(Item item);

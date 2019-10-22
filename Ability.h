@@ -2,8 +2,8 @@
 #define ABILITY_H
 
 #include "Effect.h"
-#include "Entity.h"
 #include "Item.h"
+#include "Entity.h"
 
 #include <iostream>
 #include <string>
@@ -45,7 +45,7 @@ class Magical : public Ability
 public:
 	Magical();
 
-int ApplyCost();
+	int ApplyCost();
 
 	~Magical();
 };

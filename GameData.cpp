@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Player createCharacter()
+void CreateChar(Player * player)
 {
 	std::string u_input;
 
@@ -20,10 +20,9 @@ Player createCharacter()
 
 	std::cout << "\n\n";
 
-	Player player;
-	player.isPlayer = true;
+	player->isPlayer = true;
 
-	if (u_input == "No" || u_input == "N") 
+	if (u_input == "No" || u_input == "N")
 	{
 		wait(1.75);
 		display("Hey, you're awake. You're so close already, the tower's just up ahead, don't give up now. Relax, everyone's gone through it before. It's just a matter of getting used to it. 'Cause once you know it from the inside-out, you'll be fine.");
@@ -32,21 +31,26 @@ Player createCharacter()
 
 	std::string temp;
 	std::getline(std::cin, temp);
-	player.Name = temp;
+	player->Name = temp;
 
 	std::cout << "\n\n";
 	wait(1.75);
 
-	display(temp + " is it? That's a cool name, it's not one I hear a lot around these parts. I'm curious, what makes you SPECIAL?\n\n");
+	display(temp + " is it? That's a cool name, it's not one I hear a lot around these parts.");
+}
+
+void ChooseStats(Player * player)
+{
+	std::string u_input;
+
+	int points = 35;
+	int allocate = 0;
 
 	int * tempPtr = new int[7];
 	for (int i = 0; i < 7; i++)
 	{
 		tempPtr[i] = 0;
 	}
-
-	int points = 35;
-	int allocate = 0;
 
 	while (points > 0)
 	{
@@ -60,7 +64,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Strength] + allocate > 100 || tempPtr[Strength] + allocate < 0)
 				{
@@ -77,8 +81,8 @@ Player createCharacter()
 				}
 			}
 
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 
 		}
 
@@ -94,7 +98,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Perception] + allocate > 100 || tempPtr[Perception] + allocate < 0)
 				{
@@ -110,15 +114,15 @@ Player createCharacter()
 					std::cout << std::endl;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 
 		}
 
 		tempPtr[Perception] = tempPtr[Perception] + allocate;
 		points = points - allocate;
 
-		std::cout << "ENDURANCE governs your survivability. \nThis affects your resistance to debuffs.\n\n";
+		std::cout << "ENDURANCE governs your persistance. \nThis affects your resistance to debuffs and how many spells you can remember at once.\n\n";
 		std::cout << "ENDURANCE: " << tempPtr[Endurance] << "\n";
 		std::cout << "Skill points left: " << points << "\n";
 
@@ -127,7 +131,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Endurance] + allocate > 100 || tempPtr[Endurance] + allocate < 0)
 				{
@@ -143,8 +147,8 @@ Player createCharacter()
 					std::cout << std::endl;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 		}
 
 		tempPtr[Endurance] = tempPtr[Endurance] + allocate;
@@ -159,7 +163,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Charisma] + allocate > 100 || tempPtr[Charisma] + allocate < 0)
 				{
@@ -175,8 +179,8 @@ Player createCharacter()
 					break;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 		}
 
 		tempPtr[Charisma] = tempPtr[Charisma] + allocate;
@@ -191,7 +195,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Intelligence] + allocate > 100 || tempPtr[Intelligence] + allocate < 0)
 				{
@@ -207,8 +211,8 @@ Player createCharacter()
 					break;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 		}
 
 		tempPtr[Intelligence] = tempPtr[Intelligence] + allocate;
@@ -223,7 +227,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Agility] + allocate > 100 || tempPtr[Agility] + allocate < 0)
 				{
@@ -239,8 +243,8 @@ Player createCharacter()
 					break;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 		}
 
 		tempPtr[Agility] = tempPtr[Agility] + allocate;
@@ -255,7 +259,7 @@ Player createCharacter()
 			std::cout << "Points to allocate: ";
 			std::cin >> allocate;
 
-			if (cin.good())
+			if (std::cin.good())
 			{
 				if (tempPtr[Luck] + allocate > 100 || tempPtr[Luck] + allocate < 0)
 				{
@@ -271,8 +275,8 @@ Player createCharacter()
 					break;
 				}
 			}
-			cin.clear();
-			cin.ignore();
+			std::cin.clear();
+			std::cin.ignore();
 		}
 
 		tempPtr[Luck] = tempPtr[Luck] + allocate;
@@ -281,7 +285,7 @@ Player createCharacter()
 		if (points > 0)
 		{
 			std::cout << "You still have left over skill points, would you like to go back? ";
-			cin >> u_input;
+			std::cin >> u_input;
 			u_input = input(u_input);
 
 			if (u_input == "No" || u_input == "N")
@@ -296,17 +300,20 @@ Player createCharacter()
 
 	for (int i = 0; i < 7; i++)
 	{
-		player.stats[i] = tempPtr[i];
+		player->stats[i] = tempPtr[i];
 	}
 
+	player->inventory.resize(player->stats[Strength]);
+	player->abilities.resize(player->stats[Endurance]);
 	delete[] tempPtr;
-
-	return player;
 }
 
-Classlib createGameData()
+void ChooseAbilities(Player * player)
 {
-	Classlib classes;
 
-	return classes;
+}
+
+void ChooseItems(Player * player)
+{
+	
 }

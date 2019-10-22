@@ -7,7 +7,6 @@
 using namespace std;
 
 class Item;
-class Ability;
 
 class Entity
 {
@@ -18,9 +17,8 @@ public:
 		string Name;
 		string species;
 
-		vector<string> abilities;		//Array to store abilities
-		vector<string> skills;			//Array to store skills
-		vector<string> inventory;		//Array for items/equipment
+		vector<int> abilities;		//Array to store abilities
+		vector<int> inventory;		//Array for items/equipment
 
 		vector<int> limbHP = { 100,100,100,100,100,100 };			//Array for the health of limbs
 		vector<int> stats = { 0,0,0,0,0,0,0,0 };			//Array for player or NPC's statistics

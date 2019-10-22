@@ -12,44 +12,6 @@ Classlib::Classlib()
 	std::cout << "Class library created!\n";
 }
 
-//testing functions with integers as members
-/*
-void Classlib::addInt(int number)
-{
-	int *temp = new int[intSize + 1];
-
-	for (int i = 0; i < intSize; i++)
-	{
-		temp[i] = Integers[i];
-	}
-
-	Integers = new int[intSize + 1];
-
-	for (int i = 0; i < intSize; i++)
-	{
-		Integers[i] = temp[i];
-	}
-
-	Integers[intSize] = number;
-
-	intSize++;
-
-	delete[] temp;
-}
-
-int Classlib::getInt(int index)
-{
-	return Integers[index];
-}
-
-void Classlib::displayInt()
-{
-	for (int i = 0; i < intSize; i++)
-	{
-		std::cout << "Index: " << i << " " << Integers[i] << "\n";
-	}
-}
-*/
 #ifdef ABILITY_H
 
 void Classlib::addClass(Ability ability)

@@ -1,7 +1,6 @@
 #ifndef GAMEDATA_H
 #define GAMEDATA_H
 
-#include "Classlib.h"
 #include "Entity.h"
 
 enum stats
@@ -26,7 +25,9 @@ enum limbs
 	LegL = 5,
 };
 
-Player createCharacter();
-Classlib createGameData();
+void CreateChar(Player * player);
+void ChooseStats(Player * player);
+void ChooseAbilities(Player * player);
+void ChooseItems(Player * player);
 
 #endif

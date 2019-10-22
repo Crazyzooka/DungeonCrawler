@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "Effect.h"
 #include "Entity.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ public:
 		Item();
 		Item(string i_Name, int i_Value, int i_Weight);
 		string Name;
-		vector<string> Effects;
+		vector<Effect> Effects;
 		int Value;
 		int Weight;
 

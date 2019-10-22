@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,6 +10,8 @@
 #include "Classlib.h"
 #include "GameData.h"
 #include "Functions.h"
+
+
 using namespace std;
 
 void createEntity(Entity Player, int Description)
@@ -201,7 +204,7 @@ void createEntity(Entity Player, int Description)
 		//demon
 	}
 }
-
+/*
 int main()
 {
 	int Description = 1;
@@ -212,4 +215,4 @@ int main()
 
 	createEntity(player, Description);
 	return 0;
-}
+}*/
