@@ -5,6 +5,7 @@
 
 #include "Combat.h"
 #include "Ability.h"
+#include "Item.h"
 #include "Entity.h"
 #include "Room.h"
 
@@ -14,14 +15,14 @@ Combat::Combat()
 {
 }
 
-void Combat::startCombat(Player user, NPC RoomNPC)
+void Combat::startCombat(Entity user, NPC RoomNPC)
 {
 
 }
 
-void Combat::usePhysical(Player user, Physical action, int limb)
+void Combat::usePhysical(Entity user, Physical action, int limbHP, Weapon Weapon)
 {
-	NPC.limbHP[limb] -= Player.stats[0] +
+	user.limbHP[limbHP] -= user.stats[0] + action.Damage + Weapon.Damage;
 }
 
 void Combat::useMagical(Magical action)
@@ -34,7 +35,7 @@ void Combat::applyEffect(Entity person)
 
 }
 
-void Combat::endCombat (Player user, NPC RoomNPC)
+void Combat::endCombat (Entity user, NPC RoomNPC)
 {
 
 }

@@ -3,6 +3,9 @@
 
 #include <string>
 #include "Ability.h"
+#include "Item.h"
+#include "Room.h"
+#include "Combat.h"
 #include "Entity.h"
 
 using namespace std;
@@ -16,11 +19,11 @@ public:
 
 	Combat();
 
-	void startCombat(Player user, NPC RoomNPC);
-	void usePhysical(Physical action,int);
+	void startCombat(Entity user, NPC RoomNPC);
+	void usePhysical(Entity user, Physical action,int limbHP, Weapon Weapon);
 	void useMagical(Magical action);
 	void applyEffect(Entity person);
-	void endCombat (Player user, NPC RoomNPC);
+	void endCombat (Entity user, NPC RoomNPC);
 
 	~Combat();
 };
