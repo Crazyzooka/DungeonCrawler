@@ -80,6 +80,7 @@ void display(std::string str)
 			if (i + 1 < length && str.at(i + 1) != str.at(i))
 			{
 				std::cout << "\n";
+
 				if (i + 1 < length && str.at(i + 1) == ' ')
 				{
 					i++;

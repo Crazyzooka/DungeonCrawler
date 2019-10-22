@@ -8,6 +8,7 @@
 #include "Item.h"
 #include "Entity.h"
 
+#include <vector>
 #include <iostream>
 
 void CreateChar(Player * player)
@@ -37,6 +38,7 @@ void CreateChar(Player * player)
 	wait(1.75);
 
 	display(temp + " is it? That's a cool name, it's not one I hear a lot around these parts.");
+	display("I'm curious, what makes you SPECIAL?");
 }
 
 void ChooseStats(Player * player)
@@ -52,7 +54,7 @@ void ChooseStats(Player * player)
 		tempPtr[i] = 0;
 	}
 
-	while (points > 0)
+	while (true)
 	{
 
 		std::cout << "STRENGTH governs your heavy-lifting capabilities. \nThis affects your carry-weight and the physical abilities you can use.\n\n";
@@ -293,6 +295,17 @@ void ChooseStats(Player * player)
 				break;
 			}
 		}
+		else
+		{
+			std::cout << "You've allocated all your points. Would you like to continue? ";
+			std::cin >> u_input;
+			u_input = input(u_input);
+
+			if (u_input == "Yes" || u_input == "Y")
+			{
+				break;
+			}
+		}
 
 		std::cin.clear();
 		std::cin.ignore();
@@ -310,59 +323,73 @@ void ChooseStats(Player * player)
 
 void ChooseAbilities(Player * player, Classlib * library)
 {
+	std::string u_input;
 	int counter = 0;
 	int valid = 0;
-	int tempAdd = 0;
-
-	for (int i = 0; i < library->abilitySize; i++)
+	
+	//displays what abilities the player is eligible for
+	while (true)
 	{
-		for (int j = 0; j < 7; j++)
+		valid = 0;
+		std::cout << "\nChoose from the following abilities that you're eligible for: \n";
+
+		for (int i = 0; i < library->abilitySize; i++)
 		{
-			if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+			for (int j = 0; j < 7; j++)
 			{
-				valid = 0;
-				break;
+				if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+				{
+					valid = 0;
+					break;
+				}
+
+				valid++;
 			}
 
-			valid++;
-		}
-
-		if (valid == 7)
-		{
-			counter++;
-			valid = 0;
-		}
-	}
-
-	Ability * temp = new Ability[counter];
-
-	for (int i = 0; i < library->abilitySize; i++)
-	{
-		for (int j = 0; j < 7; j++)
-		{
-			if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+			if (valid == 7)
 			{
+				for (int k = 0; k < counter; k++)
+				{
+					if(player->abilities[k] == i)
+					{
+						std::cout << "You've already learnt this ability ";
+					}
+				}
+
+				std::cout << "- " << library->getAbility(i).Name << "\n";
 				valid = 0;
-				break;
+			}
+		}
+
+		std::cout << "You can learn " << player->abilities.size() << " more abilities.\n\n";
+
+		std::cin >> u_input;
+		u_input = input(u_input);
+
+		for (int i = 0; i < library->abilitySize; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+				{
+					valid = 0;
+					break;
+				}
+
+				valid++;
 			}
 
-			valid++;
+			if (valid == 7 && library->getAbility(i).Name == u_input)
+			{
+				player->abilities[counter] = i;
+				std::cout << "You've learnt " << library->getAbility(i).Name << "!\n";
+				counter++;
+				valid = 0;
+			}
 		}
 
-		if (valid == 7)
-		{
-			temp[tempAdd] = library->getAbility(tempAdd);
-			tempAdd++;
-			valid = 0;
-		}
 	}
 
-	for (int i = 0; i < counter; i++)
-	{
-		std::cout << i << " " << temp[i].Name << "\n";
-	}
-
-	std::cout << "\nWhich ability would you like to learn?\n";
 }
 
 void ChooseItems(Player * player, Classlib * library)

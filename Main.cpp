@@ -16,6 +16,8 @@ int main()
 	createItems(library);
 	createAbilities(library);
 
+	library->displayAbilities();
+
 	// creates character
 	Player * player = new Player();
 

@@ -71,7 +71,7 @@ void createEntity(Classlib *library)
 	Bandit.stats = { 8,5,4,4,1,5,3,0 };
 	Bandit.expDrop = 0;
 
-	library->addClass(bandit);
+	library->addClass(Bandit);
 
 	NPC Orc = NPC();
 	Orc.species = "Orc";
@@ -96,7 +96,7 @@ void createEntity(Classlib *library)
 	Merchant.stats = { 50,50,50,50,50,50,50,0 };
 	Merchant.expDrop = 0;			//Merchant.expDrop = 120*Player.level;
 
-	library.addClass(Merchant);
+	library->addClass(Merchant);
 
 	NPC Dragon = NPC();
 	Dragon.species = "Dragon";

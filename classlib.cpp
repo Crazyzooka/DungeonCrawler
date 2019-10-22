@@ -1,9 +1,9 @@
 #include "pch.h"
 
 #include "Classlib.h"
-//#include "Ability.h"
+#include "Ability.h"
 #include "Effect.h"
-//#include "Item.h"
+#include "Item.h"
 #include "Entity.h"
 #include <iostream>
 

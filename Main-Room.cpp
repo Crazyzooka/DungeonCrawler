@@ -6,8 +6,6 @@
 #include "Classlib.h"
 #include "Functions.h"
 
-#include "Room.cpp"
-
 #include<iostream>
 #include<vector>
 #include<string>
