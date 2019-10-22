@@ -12,7 +12,7 @@
 
 using namespace std;
 
-void createRoom(Classlib *library, int Description, Entity Player) {
+void createRoom(Classlib *library, Entity Player) {
     Room Room;
     int numItems = myRandom(5);
 
@@ -23,7 +23,6 @@ void createRoom(Classlib *library, int Description, Entity Player) {
     for(int i = 0; i < numItems; i++) {
         Room.RoomItems[i] = library->getItem(myRandom(library->itemSize));
     }
-    
 }
 
 /*int main() {
