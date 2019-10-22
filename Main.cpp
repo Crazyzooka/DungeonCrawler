@@ -8,16 +8,21 @@
 #include <string>
 
 extern void createItems(Classlib * library);
+extern void createAbilities(Classlib * library);
 
 int main()
 {
 	Classlib * library = new Classlib();
 	createItems(library);
+	createAbilities(library);
 
 	// creates character
 	Player * player = new Player();
 
 	CreateChar(player);
+	ChooseStats(player);
+	ChooseAbilities(player, library);
+
 
 	//initialise floor array to generate floors on
 	int length = FLOORSIZE;
@@ -181,7 +186,7 @@ int main()
 
 				if (userInput == "Character")
 				{
-					player.viewCharacter();
+					player->viewCharacter();
 				}
 			}
 			else if (userInput == "Attack")

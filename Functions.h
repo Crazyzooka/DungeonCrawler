@@ -14,7 +14,7 @@ enum ROOMS
 
 const int FLOORSIZE = 7;
 
-int random(int limit);
+int myRandom(int limit);
 std::string input(std::string u_input);
 
 void wait(float time);

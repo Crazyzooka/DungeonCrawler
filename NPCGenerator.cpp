@@ -27,7 +27,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC bat = NPC();
 					bat.species = "Bat";
-					//bat.level = random(2*Player.level-(Player.level-1))+(2*Player.level-5);
+					//bat.level = myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
 					bat.stats = { 2,0,2,0,1,9,0,0 };
 					bat.expDrop = 0;
 					bat.expDrop = 20*Player.level;
@@ -45,7 +45,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC rat = NPC();
 					rat.species = "Rat";
-					//rat.level = random(Player.level+5)+(Player.level-5);		//Level 
+					//rat.level = myRandom(Player.level+5)+(Player.level-5);		//Level 
 					/*if (rat.level <= 0)
 					{
 							abs(rat.level); 
@@ -73,7 +73,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC zombie = NPC();
 					zombie.species = "Zombie";
-					//zombie.level = random(2*Player.level-(Player.level-1))+(2*Player.level-5);
+					//zombie.level = myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
 					zombie.stats = { 8,3,4,0,1,2,0,0 };
 					zombie.expDrop = 0;
 					zombie.expDrop = 20*Player.level;
@@ -85,14 +85,14 @@ void createEntity(Entity Player, int Description, Classlib*library)
 		}
 		else if (Player.level <=15)
 		{
-			//Trigger = random(Player.level-6)+(Player.level+3)	//Between 3 and 6
+			//Trigger = myRandom(Player.level-6)+(Player.level+3)	//Between 3 and 6
 			switch (Trigger)
 			{
 				case 3:
 				{
 					NPC skeleton = NPC();
 					skeleton.species = "Skeleton";		//Using skeleton archer from MC as base
-					//skeleton.level = random(100);
+					//skeleton.level = myRandom(100);
 					skeleton.stats = { 6,7,5,0,0,4,4,0 };
 					skeleton.expDrop = 0;
 					skeleton.expDrop = 20*Player.level;
@@ -104,7 +104,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC goblin = NPC();
 					goblin.species = "Goblin";	//Goblin from BGO
-					//goblin.level = random(2*Player.level-(Player.level-1))+(2*Player.level-5);
+					//goblin.level = myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
 					goblin.stats = { 3,4,2,0,2,7,7,0 };
 					goblin.expDrop = 0;
 					goblin.expDrop = 2*Player.level;
@@ -116,7 +116,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC spider = NPC();
 					spider.species = "Giant Spider";
-					//spider.level = random(2*Player.level-(Player.level-1))+(2*Player.level-5);
+					//spider.level = myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
 					spider.stats = { 7,3,2,0,1,7,2,0 };
 					spider.expDrop = 0;
 					spider.expDrop = 20*Player.level;
@@ -128,7 +128,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 				{
 					NPC bandit = NPC();
 					bandit.Name = "Bandit";
-					//bandit.level = random(2*Player.level-(Player.level-1))+(2*Player.level-5);
+					//bandit.level = myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
 					bandit.stats = { 8,5,4,4,1,5,3,0 };
 					bandit.expDrop = 0;
 					bandit.expDrop = 20*Player.level;
@@ -140,14 +140,14 @@ void createEntity(Entity Player, int Description, Classlib*library)
 		}
 		else if (Player.level <= 25)
 		{
-			//Trigger = random(Player.level-7)+(Player.level+6);
+			//Trigger = myRandom(Player.level-7)+(Player.level+6);
 			switch (Trigger)
 			{
 				case 7:
 				{
 					NPC orc = NPC();
 					orc.species = "Orc";		//write an equation that uses the player's level to scale the stats of the enemies
-					//orc.level = random(2*(Player.level)-(((Player.level)-1)))+(2*(Player.level)-5);
+					//orc.level = myRandom(2*(Player.level)-(((Player.level)-1)))+(2*(Player.level)-5);
 					orc.stats = { 12,3,6,0,1,2,1,0 };
 					orc.expDrop = 0;
 					orc.expDrop = 40*(Player.level);
@@ -176,7 +176,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 		NPC merchant = NPC();
 		merchant.Name = "Bob the Merchant";
 		merchant.species = "Human";
-		//merchant.level = random(100);
+		//merchant.level = myRandom(100);
 		merchant.stats = { 50,50,50,50,50,50,50,0 };
 		merchant.expDrop = 0;
 		merchant.expDrop = 120*Player.level;
@@ -193,7 +193,7 @@ void createEntity(Entity Player, int Description, Classlib*library)
 		NPC dragon = NPC();
 		dragon.species = "Dragon";
 		for(int i =0; i < 8; i++) {}
-		//dragon.level = random(100);
+		//dragon.level = myRandom(100);
 		dragon.stats = { 50,50,50,50,50,50,50,0 };
 		dragon.expDrop = 0;
 		dragon.expDrop = 500*Player.level;

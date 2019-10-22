@@ -20,13 +20,13 @@
 
 //wait function that is compatible with windows and linux versions
 
-int random(int limit)
+int myRandom(int limit)
 {
-	//changes seed of randomiser
+	//changes seed of myRandomiser
 
 	srand(time(NULL)*rand());
 
-	//randomises number in range of limit with new random seed
+	//myRandomises number in range of limit with new myRandom seed
 
 	int number = rand() % limit;
 	return number;
@@ -115,7 +115,6 @@ void display(std::string str)
 void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 {
 	std::cout << "\n";
-	wait(1);
 
 	//switch case for each type of cell in the array possible, and displays the character
 
@@ -157,10 +156,9 @@ void printFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 	}
 
 	std::cout << "\n";
-	wait(1);
 }
 
-//generates a random path from the entrance and exit
+//generates a myRandom path from the entrance and exit
 
 void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 {
@@ -192,7 +190,7 @@ void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 
 	for (int i = 0; i < 2; i++)
 	{
-		//if statement to draw random path from entrance first, then the exit
+		//if statement to draw myRandom path from entrance first, then the exit
 
 		if (i == 0)
 		{
@@ -210,10 +208,10 @@ void generatePath(int matrix[FLOORSIZE][FLOORSIZE], int length)
 		{
 			//gets direction it should walk
 
-			direction = random(4);
+			direction = myRandom(4);
 			//std::cout << direction << "\n";
 
-			//switch case depending on the random number to walk towards, if not possible it will go to the next case until it finds something possible
+			//switch case depending on the myRandom number to walk towards, if not possible it will go to the next case until it finds something possible
 
 			switch (direction)
 			{
@@ -298,19 +296,19 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 {
 	//std::cout << "generating connection\n";
 
-	//randomly generates entrance position
+	//myRandomly generates entrance position
 
 	int xentry, yentry, xexit, yexit;
 
-	xentry = random(FLOORSIZE);
-	yentry = random(FLOORSIZE);
+	xentry = myRandom(FLOORSIZE);
+	yentry = myRandom(FLOORSIZE);
 
-	//randomly generates exit position at a certain distance away from the entrance
+	//myRandomly generates exit position at a certain distance away from the entrance
 
 	while (true)
 	{
-		xexit = random(FLOORSIZE);
-		yexit = random(FLOORSIZE);
+		xexit = myRandom(FLOORSIZE);
+		yexit = myRandom(FLOORSIZE);
 
 		if (matrix[xexit][yexit] != 1 && abs(yexit - yentry) > FLOORSIZE / 4 && abs(xexit - xentry) > FLOORSIZE / 4)
 		{
@@ -334,7 +332,7 @@ void generateFloor(int matrix[FLOORSIZE][FLOORSIZE], int size)
 	{
 		//same switch case algorithm as the path generator
 
-		direction = random(2);
+		direction = myRandom(2);
 		//std::cout << direction << "\n";
 
 		//these if statements filter the switch cases so that it leads the walk towards the exit

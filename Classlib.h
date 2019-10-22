@@ -12,11 +12,6 @@ class Classlib
 {
 private:
 
-	int abilitySize = 0;
-	int effectSize  = 0;
-	int itemSize	= 0;
-	int NPCSize		= 0;
-
 	Ability *Abilities	= new Ability[0];
 	Effect	*Effects	= new Effect[0];
 	Item	*Items		= new Item[0];
@@ -25,6 +20,11 @@ private:
 public:
 
 	Classlib();
+
+	int abilitySize = 0;
+	int effectSize = 0;
+	int itemSize = 0;
+	int NPCSize = 0;
 
 	void addClass(Ability ability);
 	void addClass(Effect effect);

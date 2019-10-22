@@ -2,6 +2,7 @@
 #define GAMEDATA_H
 
 #include "Entity.h"
+#include "Classlib.h"
 
 enum stats
 {
@@ -27,7 +28,7 @@ enum limbs
 
 void CreateChar(Player * player);
 void ChooseStats(Player * player);
-void ChooseAbilities(Player * player);
-void ChooseItems(Player * player);
+void ChooseAbilities(Player * player, Classlib * library);
+void ChooseItems(Player * player, Classlib * library);
 
 #endif

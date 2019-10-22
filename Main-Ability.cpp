@@ -8,29 +8,29 @@
 
 using namespace std;
 
-void createAbilities(Classlib library)
+void createAbilities(Classlib * library)
 {
     Ability Burning = Ability();
     Burning.Name = "Burning";
     Burning.Damage = 100;
 
-	library.addClass(Burning);
+	library->addClass(Burning);
 
 	Ability Slash = Ability();
 	Slash.Name = "Burning";
 	Slash.Damage = 100;
 
-	library.addClass(Slash);
+	library->addClass(Slash);
 
 	Ability Riposte = Ability();
 	Riposte.Name = "Riposte";
 	Riposte.Damage = 100;
 
-	library.addClass(Riposte);
+	library->addClass(Riposte);
 
 	Ability Stab = Ability();
 	Stab.Name = "Stab";
 	Stab.Damage = 100;
 
-	library.addClass(Stab);
+	library->addClass(Stab);
 }

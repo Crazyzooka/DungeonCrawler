@@ -308,12 +308,12 @@ void ChooseStats(Player * player)
 	delete[] tempPtr;
 }
 
-void ChooseAbilities(Player * player)
+void ChooseAbilities(Player * player, Classlib * library)
 {
-
+	
 }
 
-void ChooseItems(Player * player)
+void ChooseItems(Player * player, Classlib * library)
 {
 	
 }
