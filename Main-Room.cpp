@@ -15,15 +15,15 @@
 using namespace std;
 
 void createRoom(Classlib *library, int Description, Entity Player) {
-    Room MonsterRoom;
-    int numItems = 5; //random();
+    Room Room;
+    int numItems = myRandom(5);
 
-    MonsterRoom.GenerateRoom(library->getNPC(myRandom(library->NPCSize)), library->getEffect(myRandom(library->effectSize)), Player);
-    MonsterRoom.Player = Player;
-    MonsterRoom.RoomName = "Room";
+    Room.GenerateRoom(library->getNPC(myRandom(library->NPCSize)), library->getEffect(myRandom(library->effectSize)), Player);
+    Room.Player = Player;
+    Room.RoomName = "Room";
 
     for(int i = 0; i < numItems; i++) {
-        MonsterRoom.RoomItems[i] = library->getItem(myRandom(library->itemSize));
+        Room.RoomItems[i] = library->getItem(myRandom(library->itemSize));
     }
     
 }

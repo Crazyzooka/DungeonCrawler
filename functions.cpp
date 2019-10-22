@@ -63,9 +63,6 @@ void wait(float time)
 void display(std::string str)
 {
 	//gets string length
-	#ifdef __linux
-	std::cout << "Linux computer\n";
-	#endif
 
 	int length = str.length();
 
