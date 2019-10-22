@@ -5,6 +5,8 @@
 
 #include "Combat.h"
 #include "Ability.h"
+#include "Entity.h"
+#include "Room.h"
 
 using namespace std;
 
@@ -17,9 +19,9 @@ void Combat::startCombat(Player user, NPC RoomNPC)
 
 }
 
-void Combat::usePhysical(Physical action)
+void Combat::usePhysical(Player user, Physical action, int limb)
 {
-
+	NPC.limbHP[limb] -= Player.stats[0] +
 }
 
 void Combat::useMagical(Magical action)

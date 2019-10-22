@@ -17,7 +17,7 @@ public:
 	Combat();
 
 	void startCombat(Player user, NPC RoomNPC);
-	void usePhysical(Physical action);
+	void usePhysical(Physical action,int);
 	void useMagical(Magical action);
 	void applyEffect(Entity person);
 	void endCombat (Player user, NPC RoomNPC);

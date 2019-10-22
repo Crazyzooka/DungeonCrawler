@@ -14,9 +14,9 @@
 
 using namespace std;
 
-void createEntity(Entity Player, int Description)
+void createEntity(Entity Player, int Description, Classlib*library)
 {	int Trigger = 0;
-	//int Trigger = random(Player.level-3)+(Player.level+3);		//Used to select specific enemies based on player level
+	//int Trigger = random(Player.level-5)+(Player.level+5);		//Used to select specific enemies based on player level
 	if (Description == 1)	//Can also be isEnemy==1 from entity.h
 	{
 		if (Player.level <= 5)
@@ -31,7 +31,7 @@ void createEntity(Entity Player, int Description)
 					bat.stats = { 2,0,2,0,1,9,0,0 };
 					bat.expDrop = 0;
 					bat.expDrop = 20*Player.level;
-					//library.addClass(bat);
+					library->addClass(bat);
 					cout << bat.species << endl;
 					cout << "STATS: ";
 					for (int i=0; i<8; i++)
@@ -66,7 +66,7 @@ void createEntity(Entity Player, int Description)
 					rat.expDrop = 0;
 					rat.expDrop = 20*Player.level;
 					cout << rat.species << endl;
-					//library.addClass(rat);
+					library->addClass(rat);
 					break;
 				}
 				case 2:
@@ -78,7 +78,7 @@ void createEntity(Entity Player, int Description)
 					zombie.expDrop = 0;
 					zombie.expDrop = 20*Player.level;
 					cout << zombie.species << endl;
-					//library.addClass(zombie);
+					library->addClass(zombie);
 					break;
 				}
 			}
@@ -97,7 +97,7 @@ void createEntity(Entity Player, int Description)
 					skeleton.expDrop = 0;
 					skeleton.expDrop = 20*Player.level;
 					cout << skeleton.species << endl;
-					//library.addClass(skeleton);
+					library->addClass(skeleton);
 					break;
 				}
 				case 4:
@@ -108,7 +108,7 @@ void createEntity(Entity Player, int Description)
 					goblin.stats = { 3,4,2,0,2,7,7,0 };
 					goblin.expDrop = 0;
 					goblin.expDrop = 2*Player.level;
-					//library.addClass(goblin);
+					library->addClass(goblin);
 					cout << goblin.species << endl;
 					break;
 				}
@@ -121,7 +121,7 @@ void createEntity(Entity Player, int Description)
 					spider.expDrop = 0;
 					spider.expDrop = 20*Player.level;
 					cout << spider.species << endl;
-					//library.addClass(spider);
+					library->addClass(spider);
 					break;
 				}
 				case 6:
@@ -133,7 +133,7 @@ void createEntity(Entity Player, int Description)
 					bandit.expDrop = 0;
 					bandit.expDrop = 20*Player.level;
 					cout << bandit.Name << endl;
-					//library.addClass(bandit);
+					library->addClass(bandit);
 					break;
 				}
 			}
@@ -152,7 +152,7 @@ void createEntity(Entity Player, int Description)
 					orc.expDrop = 0;
 					orc.expDrop = 40*(Player.level);
 					cout << orc.species << endl;
-					//library.addClass(orc);
+					library->addClass(orc);
 					break;
 				}
 				case 8:
@@ -164,7 +164,7 @@ void createEntity(Entity Player, int Description)
 					golem.expDrop = 0;
 					golem.expDrop = 50*(Player.level);
 					cout << golem.species << endl;
-					//library.addClass(golem);
+					library->addClass(golem);
 					break;
 				}
 			}
@@ -198,7 +198,7 @@ void createEntity(Entity Player, int Description)
 		dragon.expDrop = 0;
 		dragon.expDrop = 500*Player.level;
 		cout << dragon.species << endl;
-		//library.addClass(dragon);
+		library->addClass(dragon);
 
 		//minotaur
 		//demon
