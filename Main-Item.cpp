@@ -48,4 +48,6 @@ void createItems(Classlib *library)
 
     Consumable HealPotion = Consumable("Healing Potion", 35, 5);
     HealPotion.size = 150;
+
+    library->addClass(HealPotion);
 }
