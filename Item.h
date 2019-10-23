@@ -19,6 +19,8 @@ public:
 		string Name; // Name of Item
 		int Value; // Item Value
 		int Weight; // Item Weight
+		int Limb;
+		bool Equipped;
 
 		void test();
 

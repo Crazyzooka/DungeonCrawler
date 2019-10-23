@@ -12,17 +12,19 @@ using namespace std;
 // Default constructor
 Item::Item() 
 {
-    Name	= " ";
-    Value	= 0;
-    Weight	= 0;
+    Name	 = " ";
+    Value	 = 0;
+    Weight	 = 0;
+	Equipped = false;
 }
 
 // Constructor that allocates the parameters to their respective variables.
 Item::Item(string i_Name, int i_Value, int i_Weight) 
 {
-    Name	= i_Name;
-    Value	= i_Value;
-    Weight	= i_Weight;
+    Name	 = i_Name;
+    Value	 = i_Value;
+    Weight 	 = i_Weight;
+	Equipped = false;
 }
 
 void Item::test()
@@ -35,7 +37,7 @@ Item::~Item() {
 }
 
 Equipment::Equipment(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {
-	Condition = 0;
+	Condition = 200;
 	Limb = 0;
 }
 
@@ -63,18 +65,17 @@ Weapon::~Weapon() {
 
 Consumable::Consumable(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_Value, i_Weight) {
 	size = 0;
+	Limb = -1;
 }
 
 // Function that applies the consumable to all limbs
 void Consumable::ApplyToAll(Entity Entity) {
-	for (int i = 0; i < 6; i++) {
-		Entity.limbHP[i] -= size;
-	}
+
 }
 
 // Function that applies the consumable to a specific limbs
 void Consumable::ApplyToLimb(Entity Entity, int Limb) {
-	Entity.limbHP[Limb] -= size;
+
 }
 
 Consumable::~Consumable() {

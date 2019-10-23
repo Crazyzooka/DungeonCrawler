@@ -14,13 +14,14 @@ int Entity::currentID = 0;
 //Constructor that allocates the parameters to their variables
 Entity::Entity()
 {
-	Name = "?";
-	level = 1;
-	ID = currentID++;
-	mana = 100;
-	gold = 300;
-
-	isDead = 0;
+	Name	= "?";
+	HP		= 100;
+	level	= 1;
+	ID		= currentID++;
+	stamina = 100;
+	mana	= 100;
+	gold	= 300;
+	isDead	= 0;
 }
 
 Entity::~Entity()
@@ -30,7 +31,7 @@ Entity::~Entity()
 
 Player::Player()
 {
-
+	isInCombat = false;
 }
 
 void Player::takeItem(Item item)
@@ -106,7 +107,10 @@ Player::~Player()
 
 NPC::NPC()
 {
-
+	abilities = { 0,1,2,3 };
+	isBoss	   = false;
+	isFriendly = false;
+	isMerchant = false;
 }
 
 NPC::~NPC()

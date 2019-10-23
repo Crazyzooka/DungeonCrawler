@@ -17,22 +17,23 @@ public:
 		string Name;
 		string species;
 
-		vector<int> abilities;		//Array to store abilities
+		vector<int> abilities;									//Array to store abilities
 
 		vector<int> limbHP = { 100,100,100,100,100,100 };		//Array for the health of limbs
 		vector<int> limbEquip;								//Array for equipment of every limb
 		vector<int> stats = { 0,0,0,0,0,0,0,0 };			//Array for player or NPC's statistics
 
-		int mana;						//Used for using skills and abilities
+		int HP;
+		int mana;												//Used for using skills and abilities
+		int stamina;
 		int level;
-		int ID;							//Number of entity created
+		int ID;													//Number of entity created
 		int gold;
 		bool isDead;
 		bool isInCombat;
 		bool isPlayer;
 		
-
-		Entity();		//Defines the entity's species as it is created
+		Entity();												//Defines the entity's species as it is created
 		~Entity();
 
 };

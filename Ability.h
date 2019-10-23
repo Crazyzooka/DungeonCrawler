@@ -24,7 +24,8 @@ public:
 
 	vector<int> SkillsRequire = { 0,0,0,0,0,0,0 };
 
-    virtual void ApplyCost();
+    virtual void ApplyCost(Entity * player);
+	virtual bool CalculateChance(Entity * user);
 
     ~Ability();
 };
@@ -35,6 +36,7 @@ public:
 	Physical();
 
 	void ApplyCost(Entity * user);
+	bool CalculateChance(Entity * user);
 
 	~Physical();
 };
@@ -45,6 +47,7 @@ public:
 	Magical();
 
 	void ApplyCost(Entity * user);
+	bool CalculateChance(Entity * user);
 
 	~Magical();
 };

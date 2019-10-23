@@ -23,12 +23,12 @@ int main()
 
 	//Character creation phase
 	Player * player = new Player();
-	/*
+
 	//starting gear for player
-	CreateChar(player);
+	//CreateChar(player);
 	ChooseStats(player);
 	ChooseAbilities(player, library);
-	*/
+
 	//creates player inventory
 	std::vector<Item> playerInv;
 	playerInv.resize(player->stats[Strength]);
@@ -41,20 +41,26 @@ int main()
 	playerInv = ChooseItems(playerInv, player, library);
 	
 	std::cout << "\n";
-
-	//display("...Leaves crunch as you approach the fortress, the forest darkens as it starts to rain. You shamble into a dark gate house and find a ladder going down.");
+	//display("..Leaves crunch as you step closer to the fortress, the forest darkens as it starts to rain. You shamble into a dark gatehouse and find a ladder going down.");
 
 	//initialise floor array to generate floors on
 	int length = FLOORSIZE;
 	int floor[FLOORSIZE][FLOORSIZE];
 
-	Room * genRoom = new Room();
-
 	//initialises game variables to be used
 	std::string userInput;
-	int userx, usery, newFloor, lastRoom, currentRoom, totalItems;
-	totalItems = 0;
-	newFloor = 1;
+	Room * genRoom = new Room();
+
+	int userx, usery, newFloor, lastRoom, newRoom, currentRoom, totalItems, whosTurn;
+	
+	userx		= 0;
+	usery		= 0;
+	newFloor	= 1;
+	newRoom		= 1;
+	lastRoom	= 0;
+	currentRoom = 0;
+	totalItems	= 0;
+	whosTurn	= 0;
 
 	while (true)
 	{
@@ -92,7 +98,7 @@ int main()
 
 						wait(1.75);
 						
-						display("You grab onto the ladder, and descend further into the abyss, one step at a time.");
+						//display("You grab onto the ladder, and descend further into the abyss, one step at a time.");
 					}
 				}
 			}
@@ -100,6 +106,12 @@ int main()
 
 		//prints out floor map
 		printFloor(floor, length);
+
+		if (newRoom == 1)
+		{
+			genRoom->GenerateRoom(library->getNPC(myRandom(library->NPCSize)), *player, library);
+			newRoom = 0;
+		}
 
 		//displays information based on surroundings
 		if (currentRoom == 1)
@@ -132,13 +144,19 @@ int main()
 			display("- West");
 		}
 
-		genRoom->GenerateRoom(library->getNPC(myRandom(library->NPCSize)),*player,library);
-
-		std::cout << genRoom->nonPlayer.species << "\n";
+		display("One " + genRoom->nonPlayer.species + " is standing idly in the room.");
 
 		//player exploration phase where they can make commands to interact with room and map
-		while (true)
+		while (player->isInCombat == false)
 		{
+			//checks to see if the NPC in the room is going to attack or not
+			if (genRoom->nonPlayer.isFriendly == false && genRoom->nonPlayer.isDead == false)
+			{
+				display("The " + genRoom->nonPlayer.species + " is approaching to attack!");
+				player->isInCombat = true;
+				break;
+			}
+
 			std::cin >> userInput;
 			userInput = input(userInput);
 
@@ -155,6 +173,7 @@ int main()
 					usery = usery - 1;
 					currentRoom = floor[userx][usery];
 					floor[userx][usery] = PlayerMark;
+					newRoom = 1;
 
 					break;
 				}
@@ -166,6 +185,7 @@ int main()
 					userx = userx + 1;
 					currentRoom = floor[userx][usery];
 					floor[userx][usery] = PlayerMark;
+					newRoom = 1;
 
 					break;
 				}
@@ -177,6 +197,7 @@ int main()
 					usery = usery + 1;
 					currentRoom = floor[userx][usery];
 					floor[userx][usery] = PlayerMark;
+					newRoom = 1;
 
 					break;
 				}
@@ -188,6 +209,7 @@ int main()
 					userx = userx - 1;
 					currentRoom = floor[userx][usery];
 					floor[userx][usery] = PlayerMark;
+					newRoom = 1;
 
 					break;
 				}
@@ -204,6 +226,7 @@ int main()
 				{
 					floor[userx][usery] = currentRoom;
 					newFloor = 1;
+					newRoom  = 1;
 					break;
 				}
 
@@ -222,12 +245,24 @@ int main()
 				if (userInput == "Character")
 				{
 					player->viewCharacter();
+
 					std::cout << "\nAbilities I can perform in combat: \n";
-					for (int k = 0; k < player->abilities.size(); k++)
+
+					for (int k = 0; k < library->abilitySize; k++)
 					{
 						if (player->abilities[k] != -1)
 						{
 							std::cout << "- " << library->getAbility(player->abilities[k]).Name << "\n";
+						}
+					}
+
+					std::cout << "\nI currently have equipped: \n";
+
+					for (int i = 0; i < playerInv.size(); i++)
+					{
+						if (playerInv[i].Equipped == true)
+						{
+							std::cout << "- " << playerInv[i].Name << "\n";
 						}
 					}
 				}
@@ -261,7 +296,94 @@ int main()
 			}
 			else if (userInput == "Attack")
 			{
-				
+				std::cin >> userInput;
+				userInput = input(userInput);
+
+				if (userInput == genRoom->nonPlayer.species)
+				{
+					genRoom->nonPlayer.isFriendly = false;
+				}
+			}
+			else if (userInput == "Use")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+			}
+			else if (userInput == "Equip")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+
+				for (int i = 0; i < playerInv.size(); i++)
+				{
+					if (userInput == playerInv[i].Name)
+					{
+						//equips player item
+						if (player->limbEquip[playerInv[i].Limb] == 0)
+						{
+							player->limbEquip[playerInv[i].Limb] = 1;
+							playerInv[i].Equipped = true;
+						}
+						else
+						{
+							for (int j = 0; j < playerInv.size(); j++)
+							{
+								if (playerInv[j].Limb == i)
+								{
+									playerInv[j].Equipped = false;
+								}
+							}
+							playerInv[i].Equipped = true;
+						}
+
+						break;
+					}
+				}
+			}
+			else if (userInput == "Take")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+			}
+			else if (userInput == "Drop")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+
+				for (int i = 0; i < playerInv.size(); i++)
+				{
+					if (userInput == playerInv[i].Name)
+					{
+						std::cout << "You drop your " << playerInv[i].Name << " on the floor.\n";
+						genRoom->RoomItems.resize(genRoom->RoomItems.size() + 1);
+
+						genRoom->RoomItems[genRoom->RoomItems.size() - 1] = playerInv[i];
+
+						//resizes the backpack as the player buys item from the dude
+						if (i != playerInv.size() - 1)
+						{
+							playerInv[i] = playerInv[playerInv.size() - 1];
+							playerInv.resize(playerInv.size() - 1);
+						}
+						else
+						{
+							playerInv.resize(playerInv.size() - 1);
+						}
+
+						break;
+					}
+				}
+
+			}
+			else if (userInput == "Buy")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
+			}
+			else if (userInput == "Sell")
+			{
+				std::cin >> userInput;
+				userInput = input(userInput);
 			}
 			else if (userInput == "Help")
 			{
@@ -275,9 +397,158 @@ int main()
 				display("What is " + userInput + "? If you need help, type 'help'.");
 			}
 		}
+
+		if (player->stats[Agility] > genRoom->nonPlayer.stats[Agility])
+		{
+			display("It seems like you're more nimble than your opponent!");
+			whosTurn = 0;
+		}
+		else
+		{
+			display("Your opponent bunny hops, summersaults, and backflips towards you. I think they're faster than you are.");
+			whosTurn = 1;
+		}
+
+		while (player->isInCombat == true)
+		{
+			std::cout << genRoom->nonPlayer.species << "'s HP: " << genRoom->nonPlayer.HP << "\n";
+			std::cout << "Your HP: " << player->HP << "\n";
+
+			if (whosTurn == 0)
+			{
+				display("It's your move: ");
+
+				std::cout << "Stamina: " << player->stamina << "\n";
+				std::cout << "Mana: " << player->mana << "\n";
+
+				std::cout << "\nAbilities: \n";
+				for (int k = 0; k < library->abilitySize; k++)
+				{
+					if (player->abilities[k] != -1)
+					{
+						std::cout << "- " << library->getAbility(player->abilities[k]).Name << "\n";
+					}
+				}
+
+				std::cin >> userInput;
+				userInput = input(userInput);
+
+				if (userInput == "Attack")
+				{
+					std::cin >> userInput;
+					userInput = input(userInput);
+
+					for (int k = 0; k < library->abilitySize; k++)
+					{
+						if (userInput == library->getAbility(player->abilities[k]).Name)
+						{
+							if (library->getAbility(player->abilities[k]).CalculateChance(player) == true)
+							{
+								genRoom->nonPlayer.HP -= library->getAbility(player->abilities[k]).Damage;
+
+								library->getAbility(player->abilities[k]).ApplyCost(player);
+								display("Your attack hits!");
+
+								break;
+							}
+							else
+							{
+								display("Your attack misses.");
+								break;
+							}
+						}
+					}
+					
+				}	
+				else if (userInput == "Use")
+				{
+					std::cin >> userInput;
+					userInput = input(userInput);
+				}
+				else if (userInput == "Equip")
+				{
+					std::cin >> userInput;
+					userInput = input(userInput);
+
+					for (int i = 0; i < playerInv.size(); i++)
+					{
+						if (userInput == playerInv[i].Name)
+						{
+							//equips player item
+							if (player->limbEquip[playerInv[i].Limb] == 0)
+							{
+								player->limbEquip[playerInv[i].Limb] = 1;
+								playerInv[i].Equipped = true;
+							}
+							else
+							{
+								for (int j = 0; j < playerInv.size(); j++)
+								{
+									if (playerInv[j].Limb == i)
+									{
+										playerInv[j].Equipped = false;
+									}
+								}
+								playerInv[i].Equipped = true;
+							}
+
+							break;
+						}
+					}
+				}
+
+				whosTurn++;
+			}
+			else if (whosTurn == 1)
+			{
+				display("Your opponent makes a move.");
+				int random = myRandom(genRoom->nonPlayer.abilities.size());
+				display("The " + genRoom->nonPlayer.species + " attacks you with a " + library->getAbility(genRoom->nonPlayer.abilities[random]).Name + "!");
+
+				if (library->getAbility(genRoom->nonPlayer.abilities[random]).CalculateChance(player) == true)
+				{
+					player->HP -= library->getAbility(genRoom->nonPlayer.abilities[random]).Damage;
+					display("Your opponent's attack hits!");
+				}
+				else
+				{
+					display("Your opponent's attack misses!");
+				}
+				
+				player->stamina += player->stats[Agility] + player->stats[Endurance];
+				player->mana += player->stats[Intelligence] + player->stats[Endurance];
+
+				display("You regen some stamina and mana");
+
+				whosTurn++;
+			}
+
+			if (whosTurn > 1)
+			{
+				whosTurn = 0;
+			}
+
+			if (player->HP <= 0)
+			{
+				display("It looks like your opponent got the upperhand...");
+				break;
+			}
+
+			if (genRoom->nonPlayer.HP <= 0)
+			{
+				display("With a decisive blow, your opponent falls to the ground. They're now dead.");
+				player->isInCombat = false;
+				genRoom->nonPlayer.isDead = true;
+			}
+		}
+
+		if (player->HP <= 0)
+		{
+			display("Your vision fades away, strength draining, you drop to the floor.");
+		}
 	}
 
+	display("Your corpse is consumed by the dungeon. This was the story of " + player->Name + " may you rest in peace.");
 	delete library;
-
 	return 0;
 }

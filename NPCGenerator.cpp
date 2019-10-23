@@ -61,7 +61,7 @@ void createEntity(Classlib *library)
 	library->addClass(Goblin);
 
 	NPC Spider = NPC();
-	Spider.species = "Giant Spider";
+	Spider.species = "Spider";
 	Spider.level = 1;
 	Spider.stats = { 7,3,2,0,1,7,2,0 };
 	Spider.expDrop = 0;
