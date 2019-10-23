@@ -18,6 +18,8 @@ Entity::Entity()				//Creating an empty entity
 	ID = currentID++;
 	mana = 100;
 	gold = 300;
+
+	isDead = 0;
 }
 
 Entity::~Entity()

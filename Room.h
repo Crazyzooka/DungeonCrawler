@@ -3,7 +3,7 @@
 
 #include "Item.h"
 #include "Entity.h"
-#include "Effect.h"
+#include "Classlib.h"
 
 #include <iostream>
 #include <string>
@@ -18,17 +18,16 @@ public:
 
     //VARIABLES
     string RoomName;
-    Entity Player;
-    Entity NPC;
+    Player User;
+    NPC nonPlayer;
     vector<Item> RoomItems;
     string Description;
-    Effect RoomEffect;
     int numItems;
     
     //FUNCTIONS
     void GenerateNPCS(Entity newNPC);
     void ApplyEffect(Entity EffectEntity);
-    void GenerateRoom(Entity NPCs, Effect Effects, Entity Player);
+    void GenerateRoom(NPC NPCs, Player Player, Classlib * library);
     Entity GetNPC();
 
     ~Room();

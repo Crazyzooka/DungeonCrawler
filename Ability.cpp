@@ -1,8 +1,9 @@
 #include "pch.h"
 
 #include "Ability.h"
-#include "Effect.h"
+
 #include "Item.h"
+#include "GameData.h"
 
 #include <iostream>
 #include <string>
@@ -12,29 +13,31 @@ using namespace std;
 
 Ability::Ability(){
 	Name = "?";
+	Damage = 50;
+	Cost = 10;
 }
 
-int Ability::ApplyCost()
+void Ability::ApplyCost()
 {
-	return Damage;
+
 }
 
 Ability::~Ability(){}
 
 Physical::Physical(){}
 
-int Physical::ApplyCost()
+void Physical::ApplyCost(Entity * user)
 {
-	return Damage;
+
 }
 
 Physical::~Physical(){}
 
 Magical::Magical(){}
 
-int Magical::ApplyCost()
+void Magical::ApplyCost(Entity * user)
 {
-	return Damage;
+	user->mana -= Cost;
 }
 
 Magical::~Magical(){}

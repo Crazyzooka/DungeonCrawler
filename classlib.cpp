@@ -2,14 +2,14 @@
 
 #include "Classlib.h"
 #include "Ability.h"
-#include "Effect.h"
+
 #include "Item.h"
 #include "Entity.h"
 #include <iostream>
 
 Classlib::Classlib()
 {
-	std::cout << "Class library created!\n";
+	//std::cout << "Class library created!\n";
 }
 
 #ifdef ABILITY_H

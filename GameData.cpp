@@ -4,12 +4,13 @@
 #include "GameData.h"
 #include "Classlib.h"
 #include "Ability.h"
-#include "Effect.h"
+
 #include "Item.h"
 #include "Entity.h"
 
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 void CreateChar(Player * player)
 {
@@ -56,7 +57,7 @@ void ChooseStats(Player * player)
 
 	while (true)
 	{
-
+		std::cout << "\n";
 		std::cout << "STRENGTH governs your heavy-lifting capabilities. \nThis affects your carry-weight and the physical abilities you can use.\n\n";
 		std::cout << "STRENGTH: " << tempPtr[Strength] << "\n";
 		std::cout << "Skill points left: " << points << "\n\n";
@@ -220,7 +221,7 @@ void ChooseStats(Player * player)
 		tempPtr[Intelligence] = tempPtr[Intelligence] + allocate;
 		points = points - allocate;
 
-		std::cout << "AGILITY governs your nimble capabilities. \nThis affects your dodge, sneak, and speed\n\n";
+		std::cout << "AGILITY governs your nimble capabilities. \nThis affects your dodge, sneak, and speed.\n\n";
 		std::cout << "AGILITY: " << tempPtr[Agility] << "\n";
 		std::cout << "Skill points left: " << points << "\n\n";
 
@@ -252,7 +253,7 @@ void ChooseStats(Player * player)
 		tempPtr[Agility] = tempPtr[Agility] + allocate;
 		points = points - allocate;
 
-		std::cout << "LUCK governs your luck capabilities. \nThis affects your critical hit chance\n\n";
+		std::cout << "LUCK governs your luck capabilities. \nThis affects your critical hit chance.\n\n";
 		std::cout << "LUCK: " << tempPtr[Luck] << "\n";
 		std::cout << "Skill points left: " << points << "\n\n";
 
@@ -292,6 +293,7 @@ void ChooseStats(Player * player)
 
 			if (u_input == "No" || u_input == "N")
 			{
+				std::cout << "\n";
 				break;
 			}
 		}
@@ -303,6 +305,7 @@ void ChooseStats(Player * player)
 
 			if (u_input == "Yes" || u_input == "Y")
 			{
+				std::cout << "\n";
 				break;
 			}
 		}
@@ -316,8 +319,15 @@ void ChooseStats(Player * player)
 		player->stats[i] = tempPtr[i];
 	}
 
-	player->inventory.resize(player->stats[Strength]);
 	player->abilities.resize(player->stats[Endurance]);
+
+	int tempsize = player->abilities.size();
+
+	for (int i = 0; i < tempsize; i++)
+	{
+		player->abilities[i] = -1;
+	}
+
 	delete[] tempPtr;
 }
 
@@ -326,73 +336,204 @@ void ChooseAbilities(Player * player, Classlib * library)
 	std::string u_input;
 	int counter = 0;
 	int valid = 0;
+	int selected = 0;
+	int printed = 0;
 	
 	//displays what abilities the player is eligible for
-	while (true)
+	std::cout << "\nChoose from the following abilities that you're eligible for: \n";
+
+	for (int i = 0; i < library->abilitySize; i++)
 	{
-		valid = 0;
-		std::cout << "\nChoose from the following abilities that you're eligible for: \n";
-
-		for (int i = 0; i < library->abilitySize; i++)
+		for (int j = 0; j < 7; j++)
 		{
-			for (int j = 0; j < 7; j++)
+			if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
 			{
-				if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
-				{
-					valid = 0;
-					break;
-				}
-
-				valid++;
-			}
-
-			if (valid == 7)
-			{
-				for (int k = 0; k < counter; k++)
-				{
-					if(player->abilities[k] == i)
-					{
-						std::cout << "You've already learnt this ability ";
-					}
-				}
-
-				std::cout << "- " << library->getAbility(i).Name << "\n";
 				valid = 0;
+				break;
 			}
+
+			valid++;
 		}
 
-		std::cout << "You can learn " << player->abilities.size() << " more abilities.\n\n";
+		if (valid == 7)
+		{
+			std::cout << "- " << library->getAbility(i).Name << "\n";
+			printed++;
+			valid = 0;
+		}
+	}
+
+	if (printed > player->abilities.size())
+	{
+		printed = player->abilities.size();
+	}
+
+	while (true)
+	{
+		std::cout << "\nYou can learn " << printed - counter << " more abilities.\n\n";
 
 		std::cin >> u_input;
 		u_input = input(u_input);
 
 		for (int i = 0; i < library->abilitySize; i++)
 		{
-			for (int j = 0; j < 7; j++)
+			if (u_input == library->getAbility(i).Name)
 			{
-				if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+				for (int j = 0; j < 7; j++)
 				{
-					valid = 0;
-					break;
+					if (player->stats[j] < library->getAbility(i).SkillsRequire[j])
+					{
+						valid = 0;
+						break;
+					}
+
+					valid++;
 				}
 
-				valid++;
-			}
+				if (valid == 7)
+				{
+					for (int k = 0; k < counter; k++)
+					{
+						if (player->abilities[k] == i)
+						{
+							selected = 1;
+							break;
+						}
+					}
 
-			if (valid == 7 && library->getAbility(i).Name == u_input)
-			{
-				player->abilities[counter] = i;
-				std::cout << "You've learnt " << library->getAbility(i).Name << "!\n";
-				counter++;
-				valid = 0;
+					if (selected == 0)
+					{
+						player->abilities[counter] = i;
+						std::cout << "You've learnt " << library->getAbility(i).Name << "!\n";
+						counter++;
+					}
+					else
+					{
+						std::cout << "You've already learnt " << library->getAbility(i).Name << ".\n";
+					}
+
+					selected = 0;
+					valid = 0;
+				}
+				else
+				{
+					std::cout << "You don't have enough stats for " << library->getAbility(i).Name << ".\n";
+					valid = 0;
+				}
 			}
 		}
 
+		if (printed - counter <= 0)
+		{
+			std::cout << "You've learnt all the skills you can. Would you like to continue? ";
+			std::cin >> u_input;
+			u_input = input(u_input);
+
+			if (u_input == "Yes" || u_input == "Y")
+			{
+				std::cout << "\n";
+				break;
+			}
+			else
+			{
+				counter = 0;
+				for (int k = 0; k < player->abilities.size(); k++)
+				{
+					player->abilities[k] = -1;
+				}
+			}
+		}
 	}
 
+	display("Ah, so you know how to do a " + library->getAbility(player->abilities[myRandom(counter)]).Name + "? Yeah, I think you'll be alright.");
 }
 
-void ChooseItems(Player * player, Classlib * library)
+std::vector<Item> ChooseItems(std::vector<Item> playerInv, Player * player, Classlib * library)
 {
+	if (player->stats[Strength] > 0)
+	{
+		//display("Anywho, do you have any gear? It looks like you could use a hand.");
+	//display("I've got some gear I can sell off if you need.");
+
+		std::vector<Item> temp;
+		temp.resize(6);
+
+		int inventory = 0;
+		std::string u_input;
+
+		float haggle = (100 - (player->stats[Charisma] + 50));
+
+		std::cout << "\n";
+
+		std::cout << "Charisma price bonus: -" << player->stats[Charisma] << "%\n";
+		std::cout << "'A good friend' price bonus: -50%\n";
+
+		std::cout << "What would you like to buy? Type 'Done' when you're ready to go.\n";
+
+		for (int i = 0; i < temp.size(); i++)
+		{
+			temp[i] = library->getItem(myRandom(library->itemSize));
+		}
+
+		while (playerInv.size() - inventory != 0)
+		{
+			std::cout << "\n";
+
+			//displays what items the user can buy
+
+			for (int i = 0; i < temp.size(); i++)
+			{
+				std::cout << "- " << temp[i].Name << " : " << floor(temp[i].Value * haggle / 100) << " gold\n";
+			}
+
+			std::cout << "Your gold: " << player->gold << "\n";
+			std::cout << "Your inventory space: " << playerInv.size() - inventory << "\n\n";
+
+			//displays user input to choose what items to buy
+
+			std::cin >> u_input;
+			u_input = input(u_input);
+
+			if (u_input == "Done")
+			{
+				break;
+			}
+
+			//adds the purchased item to the players inventory
+
+			for (int i = 0; i < temp.size(); i++)
+			{
+				if (u_input == temp[i].Name)
+				{
+					std::cout << "You purchased a " << temp[i].Name << "!\n";
+					playerInv[inventory] = temp[i];
+
+					player->gold -= floor(temp[i].Value * haggle / 100);
+
+					inventory++;
+
+					//resizes the backpack as the player buys item from the dude
+					if (i != temp.size() - 1)
+					{
+						temp[i] = temp[temp.size() - 1];
+						temp.resize(temp.size() - 1);
+					}
+					else
+					{
+						temp.resize(temp.size() - 1);
+					}
+
+					break;
+				}
+			}
+		}
+	}
+	else
+	{
+		display("I was going to offer you some items but... it doesn't look like you can carry any.");
+	}
 	
+	//display("Well, this is where I say my goodbye. It's tough up in there, good luck.");
+
+	return playerInv;
 }

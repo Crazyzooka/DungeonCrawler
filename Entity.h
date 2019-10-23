@@ -18,7 +18,6 @@ public:
 		string species;
 
 		vector<int> abilities;		//Array to store abilities
-		vector<int> inventory;		//Array for items/equipment
 
 		vector<int> limbHP = { 100,100,100,100,100,100 };		//Array for the health of limbs
 		vector<int> limbEquip;

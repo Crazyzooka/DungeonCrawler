@@ -2,7 +2,8 @@
 #include "Item.h"
 #include "Room.h"
 #include "Entity.h"
-#include "Effect.h"
+#include "Functions.h"
+#include "Classlib.h"
 
 #include <iostream>
 #include <string>
@@ -16,24 +17,28 @@ Room::Room() {
 
 void Room::GenerateNPCS(Entity newNPC)
 {   
-    NPC = newNPC;
+
 }
 
 void Room::ApplyEffect(Entity Entity)
 {
-    //Entity.Effect = RoomEffect;
+
 }
 
-void Room::GenerateRoom(Entity NPCs, Effect Effects, Entity Player){
-    NPC = NPCs;
-    Effect Afflict = Effects;
-    
-    //RoomItems.push_back(Items);
-    
+void Room::GenerateRoom(NPC NPCs, Player Player, Classlib *library)
+{
+	RoomItems.resize(myRandom(4)+1);
+	nonPlayer = NPCs;
+	Player = Player;
+	RoomName = "Room";
+
+	for (int i = 0; i < numItems; i++) {
+		RoomItems[i] = library->getItem(myRandom(library->itemSize));
+	}
 }
 
 Entity Room::GetNPC() {
-    return NPC;
+    return nonPlayer;
 }
 
 Room::~Room() {

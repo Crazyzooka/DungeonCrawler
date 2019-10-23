@@ -11,7 +11,7 @@ using namespace std;
 
 Item::Item() 
 {
-    Name	= "?";
+    Name	= " ";
     Value	= 0;
     Weight	= 0;
 }

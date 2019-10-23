@@ -1,7 +1,6 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-#include "Effect.h"
 #include "Item.h"
 #include "Entity.h"
 
@@ -21,11 +20,11 @@ public:
 
     string Name;
     int Damage;
-    Effect toApply;
+	int Cost;
 
 	vector<int> SkillsRequire = { 0,0,0,0,0,0,0 };
 
-    virtual int ApplyCost();
+    virtual void ApplyCost();
 
     ~Ability();
 };
@@ -35,7 +34,7 @@ class Physical : public Ability
 public:
 	Physical();
 
-	int ApplyCost();
+	void ApplyCost(Entity * user);
 
 	~Physical();
 };
@@ -45,7 +44,7 @@ class Magical : public Ability
 public:
 	Magical();
 
-	int ApplyCost();
+	void ApplyCost(Entity * user);
 
 	~Magical();
 };
