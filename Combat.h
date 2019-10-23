@@ -11,8 +11,8 @@ class Combat
 {
 public:
 
-	int whosTurn;
-	NPC opponent;
+	int whosTurn;		//Value which determines whether the player or the enemy can perform an action
+	NPC opponent;		//Enemy faced by the player
 
 	Combat();
 

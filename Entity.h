@@ -11,7 +11,7 @@ class Item;
 class Entity
 {
 public:
-		static int currentID;
+		static int currentID;		//Defines the number of the entity created
 
 		//VARIABLES
 		string Name;
@@ -20,7 +20,7 @@ public:
 		vector<int> abilities;		//Array to store abilities
 
 		vector<int> limbHP = { 100,100,100,100,100,100 };		//Array for the health of limbs
-		vector<int> limbEquip;
+		vector<int> limbEquip;								//Array for equipment of every limb
 		vector<int> stats = { 0,0,0,0,0,0,0,0 };			//Array for player or NPC's statistics
 
 		int mana;						//Used for using skills and abilities
@@ -42,10 +42,10 @@ class NPC : public Entity
 public:
 
 		//VARIABLES
-		int expDrop;
-		bool isBoss;
-		bool isFriendly;
-		bool isMerchant;
+		int expDrop;				//Value given when an enemy is killed by the player in order to level up
+		bool isBoss;				//Defines whether an NPC created is a Boss
+		bool isFriendly;			//Defines whether an NPC created is friendly
+		bool isMerchant;			//Defines whether an NPC created is a merchant
 
 		NPC();
 		~NPC();
@@ -62,7 +62,7 @@ public:
 		void giveItem(Item item);					//Gives an object of the Item class
 		void useItem(Item item, Entity entity);		//Uses an object of the Item class
 		void viewCharacter();						//View stats of character
-		void levelUp();
+		void levelUp();								//Increases level, and thus stats increase
 		void attack(NPC person);
 
 		~Player();

@@ -11,7 +11,8 @@
 using namespace std;
 int Entity::currentID = 0;
 
-Entity::Entity()				//Creating an empty entity
+//Constructor that allocates the parameters to their variables
+Entity::Entity()
 {
 	Name = "?";
 	level = 1;
@@ -47,6 +48,7 @@ void Player::useItem(Item item, Entity entity)
 
 }
 
+//Displays the current statistics of the player
 void Player::viewCharacter()
 {
   for (int i = 0; i<stats.size(); i++)
@@ -81,6 +83,7 @@ void Player::viewCharacter()
 	}
 }
 
+//Increases player's level after gathering enough experience
 void Player::levelUp()
 {
 	if (stats[7] == 100)
