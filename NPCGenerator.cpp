@@ -14,13 +14,16 @@
 
 using namespace std;
 
+/*Creates either an Enemy, a Merchant, or a Boss, and saves it in the Class Library to
+later be accessed*/
 void createEntity(Classlib *library)
 {
 	NPC Bat = NPC();
 	Bat.species = "Bat";
-	Bat.level = 1; 			//Bat.level myRandom(2*Player.level-(Player.level-1))+(2*Player.level-5);
+	Bat.level = 1;
 	Bat.stats = { 2,0,2,0,1,9,0,0 };
-	Bat.expDrop = 0;		//Bat.expDrop = 20*Player.level;
+	Bat.expDrop = 0;
+	Bat.expDrop = 20*Player.level;
 
 	library->addClass(Bat);
 
@@ -29,6 +32,7 @@ void createEntity(Classlib *library)
 	Rat.stats = { 1,1,2,0,1,6,0,0 };
 	Rat.level = 1;
 	Rat.expDrop = 0;
+	Rat.expDrop = 20*Player.level;
 
 	library->addClass(Rat);
 
@@ -94,7 +98,7 @@ void createEntity(Classlib *library)
 	Merchant.species = "Human";
 	Merchant.level = 1;
 	Merchant.stats = { 50,50,50,50,50,50,50,0 };
-	Merchant.expDrop = 0;			//Merchant.expDrop = 120*Player.level;
+	Merchant.expDrop = 0;
 
 	library->addClass(Merchant);
 
@@ -110,7 +114,34 @@ void createEntity(Classlib *library)
 	Minotaur.species = "Minotaur";
 	Minotaur.level = 1;
 	Minotaur.stats = { 25,10,10,0,2,2,10,0 };
-	Minotaur.expDrop = 0;			//Minotaur.expDrop = 500*Player.level;
+	Minotaur.expDrop = 0;
 
 	library->addClass(Minotaur);
+}
+
+void inventoryGenerator(Entity NPC, Classlibrary *library)
+{
+	//Defines the size of an inventory with the limit being 5
+	int numItems = myRandom(5);
+
+	NPC.Inventory.resize(myRandom(4)+1);
+	for (int i=0; i<numItems; i++)
+	{
+		//Fills every empty spot in the inventory array with a random item
+		NPC.Inventory[i] = library->getItem(myRandom(library->itemSize));
+	}
+}
+
+NPC scaleNPC(NPC randomNPC)
+{
+		for (int i=0; i<8; i++)
+		{
+			/*Selects a random value for the a stat of an NPC within a range of 5 from the 
+			player's stats*/
+			randomNPC.stats[i] = abs(myRandom(0.5*Player.level-2)+(Player.level+5));
+		}
+		//Selects a random value for the level of an NPC within a range of 4 from the player's level
+		randomNPC.level = myRandom(2*Player.level-(Player.level-1))+(Player.level+4);
+	
+	return randomNPC;
 }
