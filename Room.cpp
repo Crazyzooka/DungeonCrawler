@@ -25,6 +25,7 @@ void Room::ApplyEffect(Entity Entity)
 
 }
 
+//Generates Room when called with random NPC and items
 void Room::GenerateRoom(NPC NPCs, Player Player, Classlib *library)
 {
 	RoomItems.resize(myRandom(4)+1);

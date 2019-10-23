@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Default constructor
 Item::Item() 
 {
     Name	= " ";
@@ -16,6 +17,7 @@ Item::Item()
     Weight	= 0;
 }
 
+// Constructor that allocates the parameters to their respective variables.
 Item::Item(string i_Name, int i_Value, int i_Weight) 
 {
     Name	= i_Name;
@@ -63,12 +65,14 @@ Consumable::Consumable(string i_Name, int i_Value, int i_Weight):Item(i_Name, i_
 	size = 0;
 }
 
+// Function that applies the consumable to all limbs
 void Consumable::ApplyToAll(Entity Entity) {
 	for (int i = 0; i < 6; i++) {
 		Entity.limbHP[i] -= size;
 	}
 }
 
+// Function that applies the consumable to a specific limbs
 void Consumable::ApplyToLimb(Entity Entity, int Limb) {
 	Entity.limbHP[Limb] -= size;
 }

@@ -27,7 +27,7 @@ public:
     //FUNCTIONS
     void GenerateNPCS(Entity newNPC);
     void ApplyEffect(Entity EffectEntity);
-    void GenerateRoom(NPC NPCs, Player Player, Classlib * library);
+    void GenerateRoom(NPC NPCs, Player Player, Classlib * library); //Generates Room when called with random NPC and items
     Entity GetNPC();
 
     ~Room();
