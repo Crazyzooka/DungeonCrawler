@@ -265,7 +265,7 @@ int main()
 
 					std::cout << "\nAbilities I can perform in combat: \n";
 					//displays abilities
-					for (int k = 0; k < library->abilitySize; k++)
+					for (int k = 0; k < player->abilities.size(); k++)
 					{
 						if (player->abilities[k] != -1)
 						{
@@ -557,7 +557,7 @@ int main()
 
 				//prints abilitites player can use
 				std::cout << "\nAbilities: \n";
-				for (int k = 0; k < library->abilitySize; k++)
+				for (int k = 0; k < player->abilities.size(); k++)
 				{
 					if (player->abilities[k] != -1)
 					{

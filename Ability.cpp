@@ -22,9 +22,7 @@ void Ability::ApplyCost(Entity * player) {}
 
 bool Ability::CalculateChance(Entity * user) {
 
-	int random = (myRandom(user->stats[Perception]) + myRandom(user->stats[Luck]) + myRandom(25));
-
-	if (random >= 25)
+	if ((myRandom(user->stats[Perception]) + myRandom(user->stats[Luck]) + myRandom(100)) >= 50)
 	{
 		return true;
 	}

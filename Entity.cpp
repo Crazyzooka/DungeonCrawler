@@ -20,7 +20,7 @@ Entity::Entity()
 	ID		= currentID++;
 	stamina = 100;
 	mana	= 100;
-	gold	= 300;
+	gold	= 80;
 	isDead	= 0;
 }
 
