@@ -21,7 +21,15 @@ Ability::Ability(){
 void Ability::ApplyCost(Entity * player) {}
 
 bool Ability::CalculateChance(Entity * user) {
-	return true;
+
+	int random = (myRandom(user->stats[Perception]) + myRandom(user->stats[Luck]) + myRandom(25));
+
+	if (random >= 25)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 Ability::~Ability(){}
@@ -30,6 +38,7 @@ Physical::Physical(){}
 
 void Physical::ApplyCost(Entity * user)
 {
+
 	user->stamina -= Cost;
 }
 

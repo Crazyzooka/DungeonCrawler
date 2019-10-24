@@ -24,11 +24,19 @@ int main()
 	//Character creation phase
 	Player * player = new Player();
 
-	//starting gear for player
-	//CreateChar(player);
+	//starting stats for player
+	CreateChar(player);
 	ChooseStats(player);
-	ChooseAbilities(player, library);
 
+	//gets array ready for ability selection
+	player->abilities.resize(player->stats[Endurance]);
+	for (int i = 0; i < player->abilities.size(); i++)
+	{
+		player->abilities[i] = -1;
+	}
+
+	ChooseAbilities(player, library);
+	
 	//creates player inventory
 	std::vector<Item> playerInv;
 	playerInv.resize(player->stats[Strength]);
@@ -38,6 +46,7 @@ int main()
 		playerInv[i] = Item();
 	}
 
+	//starting inventory for player
 	playerInv = ChooseItems(playerInv, player, library);
 	
 	std::cout << "\n";
@@ -144,8 +153,15 @@ int main()
 			display("- West");
 		}
 
-		display("One " + genRoom->nonPlayer.species + " is standing idly in the room.");
-
+		if (genRoom->nonPlayer.isDead == false)
+		{
+			display("One " + genRoom->nonPlayer.species + " is standing idly in the room.");
+		}
+		else
+		{
+			display("A corpse of " + genRoom->nonPlayer.species + " species is lying stone cold on the floor.");
+		}
+		
 		//player exploration phase where they can make commands to interact with room and map
 		while (player->isInCombat == false)
 		{
@@ -162,6 +178,7 @@ int main()
 
 			if (userInput == "Move" || userInput == "Go")
 			{
+				//movement around the room
 				std::cin >> userInput;
 				userInput = input(userInput);
 
@@ -216,14 +233,11 @@ int main()
 				if (userInput == "Up" && currentRoom == 1)
 				{
 					display("You've already been up there.");
-					/*
-					floor[userx][usery] = currentRoom;
-					newFloor = 1;
-					*/
 					break;
 				}
 				if (userInput == "Down" && currentRoom == 3)
 				{
+					//generates new floor and new room
 					floor[userx][usery] = currentRoom;
 					newFloor = 1;
 					newRoom  = 1;
@@ -234,6 +248,7 @@ int main()
 			}
 			else if (userInput == "View")
 			{
+				//gets userinput for what they want to view
 				std::cin >> userInput;
 				userInput = input(userInput);
 
@@ -244,10 +259,12 @@ int main()
 
 				if (userInput == "Character")
 				{
+					//displays player details
+					std::cout << "\nYour HP: " << player->HP << "\n";
 					player->viewCharacter();
 
 					std::cout << "\nAbilities I can perform in combat: \n";
-
+					//displays abilities
 					for (int k = 0; k < library->abilitySize; k++)
 					{
 						if (player->abilities[k] != -1)
@@ -255,7 +272,7 @@ int main()
 							std::cout << "- " << library->getAbility(player->abilities[k]).Name << "\n";
 						}
 					}
-
+					//shows what is equipped
 					std::cout << "\nI currently have equipped: \n";
 
 					for (int i = 0; i < playerInv.size(); i++)
@@ -269,6 +286,7 @@ int main()
 				
 				if (userInput == "Inventory")
 				{
+					//displays player backpack
 					display("You open your backpack:");
 
 					for (int i = 0; i < playerInv.size(); i++)
@@ -276,16 +294,24 @@ int main()
 						std::cout << "- " << playerInv[i].Name << "\n";
 					}
 				}
-
+				//views whats inside the room
 				if (userInput == "Room")
 				{
+					//displays items
 					display("The room is dark, you try your best to look around and see: ");
 					for (int i = 0; i < genRoom->RoomItems.size(); i++)
 					{
 						std::cout << "- " << genRoom->RoomItems[i].Name << "\n";
 					}
-
-					display("One" + genRoom->nonPlayer.species + " is also in the room.");
+					//displays npc
+					if (genRoom->nonPlayer.isDead == false)
+					{
+						display("One " + genRoom->nonPlayer.species + " is standing idly in the room.");
+					}
+					else
+					{
+						display("A corpse of " + genRoom->nonPlayer.species + " species is lying stone cold on the floor.");
+					}
 				}
 
 				if (userInput == genRoom->nonPlayer.species && (genRoom->nonPlayer.isDead || genRoom->nonPlayer.isMerchant))
@@ -306,8 +332,31 @@ int main()
 			}
 			else if (userInput == "Use")
 			{
+				//gets user input for use
 				std::cin >> userInput;
 				userInput = input(userInput);
+
+				for (int i = 0; i < playerInv.size(); i++)
+				{
+					if (playerInv[i].Name == "Bandages" || playerInv[i].Name == "Medkit")
+					{
+						display("You healed 50HP using your " + playerInv[i].Name + "!");
+						player->HP += 50;
+
+						//removes player healing item
+						if (i != playerInv.size() - 1)
+						{
+							playerInv[i] = playerInv[playerInv.size() - 1];
+							playerInv.resize(playerInv.size() - 1);
+						}
+						else
+						{
+							playerInv.resize(playerInv.size() - 1);
+						}
+						break;
+					}
+					
+				}
 			}
 			else if (userInput == "Equip")
 			{
@@ -323,19 +372,23 @@ int main()
 						{
 							player->limbEquip[playerInv[i].Limb] = 1;
 							playerInv[i].Equipped = true;
+
+							display("You equipped your " + playerInv[i].Name + ".");
 						}
 						else
 						{
+							//if item overwrites, then it replaces the equipped item
 							for (int j = 0; j < playerInv.size(); j++)
 							{
-								if (playerInv[j].Limb == i)
+								if (playerInv[i].Limb == playerInv[j].Limb && playerInv[j].Equipped == true)
 								{
+									display("You swapped your " + playerInv[j].Name + " for your " + playerInv[i].Name + ".");
+
 									playerInv[j].Equipped = false;
+									playerInv[i].Equipped = true;
 								}
 							}
-							playerInv[i].Equipped = true;
 						}
-
 						break;
 					}
 				}
@@ -344,6 +397,35 @@ int main()
 			{
 				std::cin >> userInput;
 				userInput = input(userInput);
+
+				for (int i = 0; i < genRoom->RoomItems.size(); i++)
+				{
+					if (userInput == genRoom->RoomItems[i].Name)
+					{
+						for (int j = 0; j < playerInv.size(); j++)
+						{
+							if (playerInv[j].Name == " ")
+							{
+								//pick up the item from the floor
+								std::cout << "You pick up the " << genRoom->RoomItems[i].Name << " from the floor.\n";
+								//gives item to player
+								playerInv[j] = genRoom->RoomItems[i];
+								//changes room inv size
+								if (i != genRoom->RoomItems.size() - 1)
+								{
+									genRoom->RoomItems[i] = playerInv[playerInv.size() - 1];
+									genRoom->RoomItems.resize(playerInv.size() - 1);
+								}
+								else
+								{
+									genRoom->RoomItems.resize(playerInv.size() - 1);
+								}
+								break;
+							}
+						}
+						break;
+					}
+				}
 			}
 			else if (userInput == "Drop")
 			{
@@ -354,36 +436,88 @@ int main()
 				{
 					if (userInput == playerInv[i].Name)
 					{
+						//drops item to the room
 						std::cout << "You drop your " << playerInv[i].Name << " on the floor.\n";
+						//resizes room
 						genRoom->RoomItems.resize(genRoom->RoomItems.size() + 1);
-
 						genRoom->RoomItems[genRoom->RoomItems.size() - 1] = playerInv[i];
-
-						//resizes the backpack as the player buys item from the dude
-						if (i != playerInv.size() - 1)
-						{
-							playerInv[i] = playerInv[playerInv.size() - 1];
-							playerInv.resize(playerInv.size() - 1);
-						}
-						else
-						{
-							playerInv.resize(playerInv.size() - 1);
-						}
-
+						//empty inv at slot
+						playerInv[i] = Item();
 						break;
 					}
 				}
-
 			}
 			else if (userInput == "Buy")
 			{
 				std::cin >> userInput;
 				userInput = input(userInput);
+				if (genRoom->nonPlayer.species == "Merchant")
+				{ 
+					for (int i = 0; i < genRoom->RoomItems.size(); i++)
+					{
+						if (userInput == genRoom->RoomItems[i].Name)
+						{
+							for (int j = 0; j < playerInv.size(); j++)
+							{
+								if (playerInv[j].Name == " ")
+								{
+									//buys the item from merchant
+									std::cout << "You buy the " << genRoom->RoomItems[i].Name << " from the merchant.\n";
+									//gives gold
+									player->gold -= genRoom->RoomItems[i].Value;
+									playerInv[j] = genRoom->RoomItems[i];
+									//changes room inv
+									if (i != genRoom->RoomItems.size() - 1)
+									{
+										genRoom->RoomItems[i] = playerInv[playerInv.size() - 1];
+										genRoom->RoomItems.resize(playerInv.size() - 1);
+									}
+									else
+									{
+										genRoom->RoomItems.resize(playerInv.size() - 1);
+									}
+									break;
+								}
+							}
+							break;
+						}
+					}
+				}
+				else
+				{
+					display("You hold your hand out to the void, you try to picture a merchant and them selling you goods, but you feel alone.");
+					display("I don't think there's a merchant here.");
+				}
 			}
 			else if (userInput == "Sell")
 			{
 				std::cin >> userInput;
 				userInput = input(userInput);
+
+				if (genRoom->nonPlayer.species == "Merchant")
+				{
+					for (int i = 0; i < playerInv.size(); i++)
+					{
+						if (userInput == playerInv[i].Name)
+						{
+							std::cout << "You sell your " << playerInv[i].Name << " to the merchant.\n";
+							//changes player gold
+							player->gold += playerInv[i].Value;
+							//adds item to the room
+							genRoom->RoomItems.resize(genRoom->RoomItems.size() + 1);
+							genRoom->RoomItems[genRoom->RoomItems.size() - 1] = playerInv[i];
+							//sets player inv to empty at slot
+							playerInv[i] = Item();
+							break;
+						}
+					}
+				}
+				else
+				{
+					display("You hold your hand out to the void, you try to picture a merchant and them buying your hard earned goods, but you feel alone.");
+					display("I don't think there's a merchant here.");
+				}
+
 			}
 			else if (userInput == "Help")
 			{
@@ -398,6 +532,8 @@ int main()
 			}
 		}
 
+
+		//finds out if player is faster than enemy or not and enters combat state
 		if (player->stats[Agility] > genRoom->nonPlayer.stats[Agility])
 		{
 			display("It seems like you're more nimble than your opponent!");
@@ -411,16 +547,15 @@ int main()
 
 		while (player->isInCombat == true)
 		{
+			//displays both HP
 			std::cout << genRoom->nonPlayer.species << "'s HP: " << genRoom->nonPlayer.HP << "\n";
 			std::cout << "Your HP: " << player->HP << "\n";
-
+			//decides whos turn it is
 			if (whosTurn == 0)
 			{
 				display("It's your move: ");
 
-				std::cout << "Stamina: " << player->stamina << "\n";
-				std::cout << "Mana: " << player->mana << "\n";
-
+				//prints abilitites player can use
 				std::cout << "\nAbilities: \n";
 				for (int k = 0; k < library->abilitySize; k++)
 				{
@@ -429,7 +564,7 @@ int main()
 						std::cout << "- " << library->getAbility(player->abilities[k]).Name << "\n";
 					}
 				}
-
+				//gets player input on attack
 				std::cin >> userInput;
 				userInput = input(userInput);
 
@@ -444,16 +579,17 @@ int main()
 						{
 							if (library->getAbility(player->abilities[k]).CalculateChance(player) == true)
 							{
+								//applies damage to enemy
 								genRoom->nonPlayer.HP -= library->getAbility(player->abilities[k]).Damage;
 
-								library->getAbility(player->abilities[k]).ApplyCost(player);
 								display("Your attack hits!");
-
+								whosTurn++;
 								break;
 							}
 							else
 							{
 								display("Your attack misses.");
+								whosTurn++;
 								break;
 							}
 						}
@@ -464,43 +600,38 @@ int main()
 				{
 					std::cin >> userInput;
 					userInput = input(userInput);
-				}
-				else if (userInput == "Equip")
-				{
-					std::cin >> userInput;
-					userInput = input(userInput);
 
 					for (int i = 0; i < playerInv.size(); i++)
 					{
-						if (userInput == playerInv[i].Name)
+						if (playerInv[i].Name == "Bandages" || playerInv[i].Name == "Medkit")
 						{
-							//equips player item
-							if (player->limbEquip[playerInv[i].Limb] == 0)
+							display("You healed 50HP using your " + playerInv[i].Name + "!");
+							player->HP += 50;
+
+							//resizes the backpack as the player buys item from the dude
+							if (i != playerInv.size() - 1)
 							{
-								player->limbEquip[playerInv[i].Limb] = 1;
-								playerInv[i].Equipped = true;
+								playerInv[i] = playerInv[playerInv.size() - 1];
+								playerInv.resize(playerInv.size() - 1);
 							}
 							else
 							{
-								for (int j = 0; j < playerInv.size(); j++)
-								{
-									if (playerInv[j].Limb == i)
-									{
-										playerInv[j].Equipped = false;
-									}
-								}
-								playerInv[i].Equipped = true;
+								playerInv.resize(playerInv.size() - 1);
 							}
-
+							whosTurn++;
 							break;
 						}
 					}
 				}
-
-				whosTurn++;
+				else if (userInput == "Help")
+				{
+					std::cout << "(Attack) (Ability)\n";
+					std::cout << "(Use) (Healing Item)\n";
+				}
 			}
 			else if (whosTurn == 1)
 			{
+			//opponents turn to attack
 				display("Your opponent makes a move.");
 				int random = myRandom(genRoom->nonPlayer.abilities.size());
 				display("The " + genRoom->nonPlayer.species + " attacks you with a " + library->getAbility(genRoom->nonPlayer.abilities[random]).Name + "!");
@@ -514,26 +645,21 @@ int main()
 				{
 					display("Your opponent's attack misses!");
 				}
-				
-				player->stamina += player->stats[Agility] + player->stats[Endurance];
-				player->mana += player->stats[Intelligence] + player->stats[Endurance];
-
-				display("You regen some stamina and mana");
 
 				whosTurn++;
 			}
-
+			//changes turn
 			if (whosTurn > 1)
 			{
 				whosTurn = 0;
 			}
-
+			//death message if player dies
 			if (player->HP <= 0)
 			{
 				display("It looks like your opponent got the upperhand...");
 				break;
 			}
-
+			//win message
 			if (genRoom->nonPlayer.HP <= 0)
 			{
 				display("With a decisive blow, your opponent falls to the ground. They're now dead.");
@@ -541,7 +667,7 @@ int main()
 				genRoom->nonPlayer.isDead = true;
 			}
 		}
-
+		//game over if player is dead
 		if (player->HP <= 0)
 		{
 			display("Your vision fades away, strength draining, you drop to the floor.");

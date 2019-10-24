@@ -31,7 +31,6 @@ class Equipment : public Item {
 public:
 	Equipment(string i_Name, int i_Value, int i_Weight);
 	int Condition; // Condition of the Equipment
-	int Limb; // Target Limb
 	vector<int> SkillsRequire = { 0,0,0,0,0,0,0 };
 	~Equipment();
 };

@@ -19,8 +19,7 @@ public:
 
 		vector<int> abilities;									//Array to store abilities
 
-		vector<int> limbHP = { 100,100,100,100,100,100 };		//Array for the health of limbs
-		vector<int> limbEquip;								//Array for equipment of every limb
+		vector<int> limbEquip = { 0,0,0,0,0,0 };					//Array for equipment of every limb
 		vector<int> stats = { 0,0,0,0,0,0,0,0 };			//Array for player or NPC's statistics
 
 		int HP;

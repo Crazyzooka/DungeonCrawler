@@ -319,14 +319,7 @@ void ChooseStats(Player * player)
 		player->stats[i] = tempPtr[i];
 	}
 
-	player->abilities.resize(player->stats[Endurance]);
-
-	int tempsize = player->abilities.size();
-
-	for (int i = 0; i < tempsize; i++)
-	{
-		player->abilities[i] = -1;
-	}
+	player->HP += player->stats[Endurance];
 
 	delete[] tempPtr;
 }
@@ -530,7 +523,7 @@ std::vector<Item> ChooseItems(std::vector<Item> playerInv, Player * player, Clas
 	}
 	else
 	{
-		display("I was going to offer you some items but... it doesn't look like you can carry any.");
+		display("I was going to offer you some items but, it doesn't look like you can carry any.");
 	}
 	
 	//display("Well, this is where I say my goodbye. It's tough up in there, good luck.");

@@ -30,13 +30,13 @@ void Room::GenerateRoom(NPC NPCs, Player Player, Classlib *library)
 {
 	int numItems = myRandom(5);
 
-	RoomItems.resize(myRandom(4)+1);
+	RoomItems.resize(numItems);
 	nonPlayer	= NPCs;
 	Player		= Player;
 	RoomName	= "Room";
 
 	for (int i = 0; i < numItems; i++) {
-		RoomItems[i] = library->getItem(myRandom(library->itemSize));
+		RoomItems[i] = library->getItem(myRandom(library->itemSize-1));
 	}
 }
 
