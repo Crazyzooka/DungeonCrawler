@@ -23,7 +23,6 @@ void createEntity(Classlib *library)
 	Bat.level = 1;
 	Bat.stats = { 2,0,2,0,1,9,0,0 };
 	Bat.expDrop = 50;
-	//Bat.expDrop = 20*Player.level;
 
 	library->addClass(Bat);
 
@@ -32,7 +31,6 @@ void createEntity(Classlib *library)
 	Rat.stats = { 1,1,2,0,1,6,0,0 };
 	Rat.level = 1;
 	Rat.expDrop = 50;
-	//Rat.expDrop = 20*Player.level;
 
 	library->addClass(Rat);
 
@@ -94,8 +92,8 @@ void createEntity(Classlib *library)
 	library->addClass(Golem);
 
 	NPC Merchant = NPC();
-	Merchant.Name = "Bob the Merchant";
-	Merchant.species = "Merchant";
+	Merchant.Name = "Bob the human";
+	Merchant.species = "Human";
 	Merchant.level = 1;
 	Merchant.stats = { 50,50,50,50,50,50,50,0 };
 	Merchant.expDrop = 50;

@@ -316,7 +316,7 @@ int main()
 
 				if (userInput == genRoom->nonPlayer.species && (genRoom->nonPlayer.isDead || genRoom->nonPlayer.isMerchant))
 				{
-					display("You take a look at the " + genRoom->nonPlayer.species + ":");
+					display("You take a look at the " + genRoom->nonPlayer.species);
 				}
 
 			}
@@ -413,12 +413,12 @@ int main()
 								//changes room inv size
 								if (i != genRoom->RoomItems.size() - 1)
 								{
-									genRoom->RoomItems[i] = playerInv[playerInv.size() - 1];
-									genRoom->RoomItems.resize(playerInv.size() - 1);
+									genRoom->RoomItems[i] = genRoom->RoomItems[genRoom->RoomItems.size() - 1];
+									genRoom->RoomItems.resize(genRoom->RoomItems.size() - 1);
 								}
 								else
 								{
-									genRoom->RoomItems.resize(playerInv.size() - 1);
+									genRoom->RoomItems.resize(genRoom->RoomItems.size() - 1);
 								}
 								break;
 							}
@@ -447,101 +447,29 @@ int main()
 					}
 				}
 			}
-			else if (userInput == "Buy")
-			{
-				std::cin >> userInput;
-				userInput = input(userInput);
-				if (genRoom->nonPlayer.species == "Merchant")
-				{ 
-					for (int i = 0; i < genRoom->RoomItems.size(); i++)
-					{
-						if (userInput == genRoom->RoomItems[i].Name)
-						{
-							for (int j = 0; j < playerInv.size(); j++)
-							{
-								if (playerInv[j].Name == " ")
-								{
-									//buys the item from merchant
-									std::cout << "You buy the " << genRoom->RoomItems[i].Name << " from the merchant.\n";
-									//gives gold
-									player->gold -= genRoom->RoomItems[i].Value;
-									playerInv[j] = genRoom->RoomItems[i];
-									//changes room inv
-									if (i != genRoom->RoomItems.size() - 1)
-									{
-										genRoom->RoomItems[i] = playerInv[playerInv.size() - 1];
-										genRoom->RoomItems.resize(playerInv.size() - 1);
-									}
-									else
-									{
-										genRoom->RoomItems.resize(playerInv.size() - 1);
-									}
-									break;
-								}
-							}
-							break;
-						}
-					}
-				}
-				else
-				{
-					display("You hold your hand out to the void, you try to picture a merchant and them selling you goods, but you feel alone.");
-					display("I don't think there's a merchant here.");
-				}
-			}
-			else if (userInput == "Sell")
-			{
-				std::cin >> userInput;
-				userInput = input(userInput);
-
-				if (genRoom->nonPlayer.species == "Merchant")
-				{
-					for (int i = 0; i < playerInv.size(); i++)
-					{
-						if (userInput == playerInv[i].Name)
-						{
-							std::cout << "You sell your " << playerInv[i].Name << " to the merchant.\n";
-							//changes player gold
-							player->gold += playerInv[i].Value;
-							//adds item to the room
-							genRoom->RoomItems.resize(genRoom->RoomItems.size() + 1);
-							genRoom->RoomItems[genRoom->RoomItems.size() - 1] = playerInv[i];
-							//sets player inv to empty at slot
-							playerInv[i] = Item();
-							break;
-						}
-					}
-				}
-				else
-				{
-					display("You hold your hand out to the void, you try to picture a merchant and them buying your hard earned goods, but you feel alone.");
-					display("I don't think there's a merchant here.");
-				}
-
-			}
 			else if (userInput == "Help")
 			{
 				std::cout << "(Move/Go) (North/East/South/West/Up/Down)\n";
-				std::cout << "(Use/Equip/Take/Drop/Buy/Sell) (Item)\n";
+				std::cout << "(Use/Equip/Take/Drop) (Item)\n";
 				std::cout << "(View) (Map/Character/Inventory/Room/NPC)\n";
 				std::cout << "(Attack) (NPC)\n";
 			}
 			else
 			{
-				display("What is " + userInput + "? If you need help, type 'help'.");
+				std::cout << "What is " + userInput + "? If you need help, type 'help'.\n";
 			}
 		}
 
 
 		//finds out if player is faster than enemy or not and enters combat state
-		if (player->stats[Agility] > genRoom->nonPlayer.stats[Agility])
+		if (player->stats[Agility] > genRoom->nonPlayer.stats[Agility] && genRoom->nonPlayer.isDead != true)
 		{
 			display("It seems like you're more nimble than your opponent!");
 			whosTurn = 0;
 		}
 		else
 		{
-			display("Your opponent bunny hops, summersaults, and backflips towards you. I think they're faster than you are.");
+			display("Your opponent is faster than you are.");
 			whosTurn = 1;
 		}
 
